@@ -15,12 +15,6 @@ const GlobalWrapper = styled.div`
   justify-content: flex-start;
   overflow: hidden;
 `;
-const Sqaure = styled.div<{ color: string }>`
-  width: 100px;
-  height: 100px;
-  background-color: ${(props) => (props.color ? props.color : "gray")};
-  margin-bottom: 200px;
-`;
 
 const OneMain = styled.div`
   background-image: url(${mainBackground});
@@ -50,9 +44,7 @@ const OneText = styled.div`
   right: 0;
   opacity: 0;
   white-space: nowrap;
-  @media ${({ theme }) => theme.size_6} {
-    /* font-size: 24px; */
-  }
+
 `;
 
 const TwoMain = styled.div`
@@ -129,8 +121,7 @@ const App = () => {
       setIsCompletedTimeLine2(false);
       let fontSize;
       let translateX;
-      let initialY;
-      // const fontSize = width <= 600 ? "24px" : "40px";
+
       if(width >= 1200){
         fontSize = "36px";
         translateX = "-=640";
