@@ -16,17 +16,20 @@ const Icon = styled.svg.attrs({
 
 const Svg = styled(Icon)`
   width: 100%;
-  background-color: #000f30;
+  /* background-color: #000f30; */
   /* padding-bottom : calc(var(--vh) * 200); */
   /* max-width: 600px; */
   overflow: visible;
   /* margin-top: 60vh; */
+  position : absolute;
+  left : 0;
+  top : 120%;
 
 `;
 
 const Path = styled.path`
   fill: none;
-  stroke: white;
+  stroke: black;
   stroke-width: 2px;
 `;
 const Path2 = styled(Path)`
@@ -35,19 +38,21 @@ const Path2 = styled(Path)`
   /* stroke : #000f30; */
 `;
 const Text = styled.text`
-  fill: white;
-  stroke: white;
+  fill: black;
+  stroke: black;
   font-size: 15px;
   visibility: hidden;
 `;
 
 const Description = styled.text`
   font-size: 15px;
-  stroke: white;
+  stroke: black;
+  visibility: hidden;
+
 `;
 
 const Circle = styled.circle`
-  fill: white;
+  fill: black;
   visibility: hidden;
 `;
 const SvgTest = () => {
@@ -102,7 +107,7 @@ const SvgTest = () => {
           ease: "elastic(2.5, 1)",
         },
       })
-      .to([ball2Ref.current, text1Ref.current], {}, 0.115)
+      .to([ball2Ref.current, text1Ref.current, description1Ref.current], {}, 0.115)
       .to([ball3Ref.current, text2Ref.current], {}, 0.208)
       .to([ball4Ref.current, text3Ref.current], {}, 0.285)
       .to([ball5Ref.current, text4Ref.current], {}, 0.372)
@@ -143,17 +148,17 @@ const SvgTest = () => {
   }, []);
 
   return (
-    <Svg ref={svgRef} viewBox="0 0 600 2300">
-      <Path ref={line1Ref} d="M 10 200  600 200" />
-      <Path ref={line2Ref} d="M 10 400  600 400" />
-      <Path ref={line3Ref} d="M 10 600  600 600" />
-      <Path ref={line4Ref} d="M 10 800  600 800" />
-      <Path ref={line5Ref} d="M 10 1000  600 1000" />
-      <Path ref={line6Ref} d="M 10 1200  600 1200" />
-      <Path ref={line7Ref} d="M 10 1400  600 1400" />
-      <Path ref={line8Ref} d="M 10 1600  600 1600" />
-      <Path ref={line9Ref} d="M 10 1800  600 1800" />
-      <Path ref={line10Ref} d="M 10 2000  600 2000" />
+    <Svg ref={svgRef} viewBox="0 0 1000 2300">
+      <Path ref={line1Ref} d="M 10 200  1000 200" />
+      <Path ref={line2Ref} d="M 10 400  1000 400" />
+      <Path ref={line3Ref} d="M 10 600  1000 600" />
+      <Path ref={line4Ref} d="M 10 800  1000 800" />
+      <Path ref={line5Ref} d="M 10 1000  1000 1000" />
+      <Path ref={line6Ref} d="M 10 1200  1000 1200" />
+      <Path ref={line7Ref} d="M 10 1400  1000 1400" />
+      <Path ref={line8Ref} d="M 10 1600  1000 1600" />
+      <Path ref={line9Ref} d="M 10 1800  1000 1800" />
+      <Path ref={line10Ref} d="M 10 2000  1000 2000" />
 
       {/* <path className="line01 line" d="M 10 200  600 200"></path>
       <path className="line02 line" d="M 10 400  600 400"></path>

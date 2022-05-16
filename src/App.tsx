@@ -2,11 +2,14 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { Z_FIXED } from "zlib";
+import Tsparticles from "./components/tsparticles";
 import { useCustomHeight } from "./hooks/useCustomHeight";
 import useWindowDimensions from "./hooks/useWindowDimensions";
 gsap.registerPlugin(ScrollTrigger);
 import mainBackground from "./images/main_bg.jpg";
 import SvgTest from "./SvgTest";
+
 
 const GlobalWrapper = styled.div`
   width: 100%;
@@ -17,11 +20,11 @@ const GlobalWrapper = styled.div`
 `;
 
 const OneMain = styled.div`
-  background-image: url(${mainBackground});
+  /* background-image: url(${mainBackground});
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
-  position: relative;
+  background-position: center; */
+  background-color : black;
 
   width: 100%;
   height: calc(var(--vh) * 100);
@@ -44,7 +47,6 @@ const OneText = styled.div`
   right: 0;
   opacity: 0;
   white-space: nowrap;
-
 `;
 
 const TwoMain = styled.div`
@@ -58,6 +60,11 @@ const TwoText = styled.div`
   color: black;
   font-weight: 500;
   visibility: hidden;
+`;
+
+const TempBox = styled.div`
+  width: 100%;
+  height: 3000px;
 `;
 
 const App = () => {
@@ -85,6 +92,8 @@ const App = () => {
     },
   });
 
+ 
+
   //   let tl = gsap.timeline({
   //     // yes, we can add it to an entire timeline!
   //     scrollTrigger: {
@@ -111,8 +120,18 @@ const App = () => {
         start: "bottom bottom",
         markers: true,
       },
-      opacity: 0,
-      scale: 2.5,
+      autoAlpha: 0,
+      position : "fixed",
+      // scale: 2.5,
+      onStart: () => {
+        console.log("animation start");
+      },
+      onComplete: () => {
+        console.log("animation complete");
+        gsap.set(oneRef.current, {
+          position : "static",
+        })
+      },
     });
   }, []);
 
@@ -122,11 +141,10 @@ const App = () => {
       let fontSize;
       let translateX;
 
-      if(width >= 1200){
+      if (width >= 1200) {
         fontSize = "36px";
         translateX = "-=640";
-      }
-      else if (width >= 900) {
+      } else if (width >= 900) {
         fontSize = "36px";
         translateX = "-=500";
       } else if (width >= 600) {
@@ -177,6 +195,8 @@ const App = () => {
   return (
     <GlobalWrapper ref={appRef}>
       <OneMain ref={oneRef}>
+       <Tsparticles />
+
         <PortFolioTextLogo>PortFolio</PortFolioTextLogo>
         <OneText ref={text1Ref}>CHOI BOSUNG</OneText>
         <OneText ref={text2Ref}>1996/09</OneText>
@@ -185,6 +205,9 @@ const App = () => {
 
       {/* <TwoMain></TwoMain> */}
       <SvgTest />
+      <TempBox>
+      </TempBox>
+     
     </GlobalWrapper>
   );
 };
