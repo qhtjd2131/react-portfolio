@@ -21,10 +21,9 @@ const Svg = styled(Icon)`
   /* max-width: 600px; */
   overflow: visible;
   /* margin-top: 60vh; */
-  position : absolute;
-  left : 0;
-  top : 120%;
-
+  position: absolute;
+  left: 0;
+  top: 120%;
 `;
 
 const Path = styled.path`
@@ -34,7 +33,7 @@ const Path = styled.path`
 `;
 const Path2 = styled(Path)`
   stroke-width: 10px;
-  fill : none;
+  fill: none;
   /* stroke : #000f30; */
 `;
 const Text = styled.text`
@@ -48,7 +47,6 @@ const Description = styled.text`
   font-size: 15px;
   stroke: black;
   visibility: hidden;
-
 `;
 
 const Circle = styled.circle`
@@ -67,8 +65,6 @@ const SvgTest = () => {
   const ball8Ref = useRef(null);
   const ball9Ref = useRef(null);
 
-
-
   const text1Ref = useRef(null);
   const text2Ref = useRef(null);
   const text3Ref = useRef(null);
@@ -77,8 +73,6 @@ const SvgTest = () => {
   const text6Ref = useRef(null);
   const text7Ref = useRef(null);
   const text8Ref = useRef(null);
-
-
 
   const description1Ref = useRef(null);
 
@@ -93,7 +87,6 @@ const SvgTest = () => {
   const line9Ref = useRef(null);
   const line10Ref = useRef(null);
 
-
   const path2Ref = useRef<SVGPathElement>(null); //TheLine
 
   useEffect(() => {
@@ -107,7 +100,11 @@ const SvgTest = () => {
           ease: "elastic(2.5, 1)",
         },
       })
-      .to([ball2Ref.current, text1Ref.current, description1Ref.current], {}, 0.115)
+      .to(
+        [ball2Ref.current, text1Ref.current, description1Ref.current],
+        {},
+        0.115
+      )
       .to([ball3Ref.current, text2Ref.current], {}, 0.208)
       .to([ball4Ref.current, text3Ref.current], {}, 0.285)
       .to([ball5Ref.current, text4Ref.current], {}, 0.372)
@@ -116,14 +113,12 @@ const SvgTest = () => {
       .to([ball8Ref.current, text7Ref.current], {}, 0.615)
       .to([ball9Ref.current, text8Ref.current], {}, 0.695);
 
-
-
     gsap
       .timeline({
         defaults: { duration: 1 },
         scrollTrigger: {
-          id : "inin",
-          markers : true,
+          id: "inin",
+          markers: true,
           trigger: svgRef.current,
           scrub: true,
           start: "top center",
@@ -227,8 +222,6 @@ const SvgTest = () => {
       <Circle ref={ball7Ref} r="20" cx="203" cy="1201"></Circle>
       <Circle ref={ball8Ref} r="20" cx="293" cy="1401"></Circle>
       <Circle ref={ball9Ref} r="20" cx="370" cy="1601"></Circle>
-
-
 
       {/* <circle className="ball ball01" r="20" cx="50" cy="100"></circle>
       <circle className="ball ball02" r="20" cx="278" cy="201"></circle>

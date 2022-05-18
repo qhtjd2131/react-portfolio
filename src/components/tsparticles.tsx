@@ -5,12 +5,6 @@ import { loadFull } from "tsparticles";
 import { Container, Engine } from "tsparticles-engine";
 
 
-
-const ParticlesBox  = styled(Particles)`
-    position : static !important;
-`;
-
-
 const Tsparticles = () => {
   const particlesInit = async (main: Engine): Promise<void> => {
     console.log(main);
@@ -31,12 +25,13 @@ const Tsparticles = () => {
         fpsLimit: 60,
         particles: {
           color: {
-            value: "#e5e5e5",
+            value: "#c5c5c5",
           },
           links: {
             enable: true,
-            color: "#e5e5e5",
+            color: "#c5c5c5",
             distance: 200,
+            opacity : 0.5,
           },
           move: {
             direction: "none",
@@ -55,8 +50,9 @@ const Tsparticles = () => {
         }, detectRetina : true
       }}
       style={{
-        width: "100%",
-        position : "absolute",
+        // width: "300%",
+
+        // position : "fixed",
       }}
     />
   );

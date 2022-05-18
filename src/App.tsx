@@ -2,21 +2,20 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Z_FIXED } from "zlib";
 import Tsparticles from "./components/tsparticles";
 import { useCustomHeight } from "./hooks/useCustomHeight";
 import useWindowDimensions from "./hooks/useWindowDimensions";
 gsap.registerPlugin(ScrollTrigger);
 import mainBackground from "./images/main_bg.jpg";
-import SvgTest from "./SvgTest";
-
+import SvgTest from "./components/SvgTest";
+import SvgTest2 from "./components/SvgTest2";
 
 const GlobalWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
 
 const OneMain = styled.div`
@@ -24,9 +23,9 @@ const OneMain = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center; */
-  background-color : black;
-
-  width: 100%;
+  background-color:#232323;
+  position: fixed;
+  width: 300%;
   height: calc(var(--vh) * 100);
 `;
 
@@ -64,16 +63,18 @@ const TwoText = styled.div`
 
 const TempBox = styled.div`
   width: 100%;
-  height: 3000px;
+  height: calc(var(--vh) * 100);
+  background-color: transparent;
 `;
 
 const App = () => {
   const { width, height } = useWindowDimensions();
   useCustomHeight();
 
-  const [isCompletedTimeLine2, setIsCompletedTimeLine2] = useState(true);
-
-  console.log(width);
+  const [property, setProperty] = useState({
+    fontSize: "0px",
+    left: 0,
+  });
 
   const oneRef = useRef(null);
   const text1Ref = useRef(null);
@@ -87,30 +88,32 @@ const App = () => {
   });
   const timeline2: gsap.core.Timeline = gsap.timeline({
     defaults: {
-      duration: 0.5,
+      duration: 1,
       ease: "power3.inOut",
     },
   });
+  //반응형 effect
+  useEffect(() => {
+    setProperty(() => {
+      let fontSizeTemp: string = "24px";
+      let rightSpace : number = 400;
+      if (width >= 1600) {
+        fontSizeTemp = "46px";
+        rightSpace = 640;
+      } else if (width >= 900) {
+        fontSizeTemp = "36px";
+        rightSpace = 480;
+      } else {
+        fontSizeTemp = "24px";
+      }
+      return {
+        fontSize: fontSizeTemp,
+        left: width - rightSpace,
+      };
+    });
+  }, [width]);
 
- 
-
-  //   let tl = gsap.timeline({
-  //     // yes, we can add it to an entire timeline!
-  //     scrollTrigger: {
-  //       trigger: appRef.current,
-  //       pin: true, // pin the trigger element while active
-  //       start: "top top", // when the top of the trigger hits the top of the viewport
-  //       end: "bottom bottom", // end after scrolling 500px beyond the start
-  //       scrub: 1, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
-  //       snap: {
-  //         snapTo: "labels", // snap to the closest label in the timeline
-  //         duration: { min: 0.2, max: 3 }, // the snap animation should be at least 0.2 seconds, but no more than 3 seconds (determined by velocity)
-  //         delay: 0.2, // wait 0.2 seconds from the last scroll event before doing the snapping
-  //         ease: "power1.inOut", // the ease of the snap animation ("power3" by default)
-  //       },
-  //     },
-  //   });
-
+  //메인화면 애니메이션
   useEffect(() => {
     gsap.to(oneRef.current, {
       scrollTrigger: {
@@ -121,81 +124,54 @@ const App = () => {
         markers: true,
       },
       autoAlpha: 0,
-      position : "fixed",
+      position: "fixed",
       // scale: 2.5,
       onStart: () => {
         console.log("animation start");
-      },
-      onComplete: () => {
-        console.log("animation complete");
-        gsap.set(oneRef.current, {
-          position : "static",
-        })
       },
     });
   }, []);
 
   useEffect(() => {
-    if (isCompletedTimeLine2) {
-      setIsCompletedTimeLine2(false);
-      let fontSize;
-      let translateX;
-
-      if (width >= 1200) {
-        fontSize = "36px";
-        translateX = "-=640";
-      } else if (width >= 900) {
-        fontSize = "36px";
-        translateX = "-=500";
-      } else if (width >= 600) {
-        fontSize = "28px";
-        translateX = "-=370";
-      } else {
-        fontSize = "20px";
-        translateX = "-20";
-      }
-
-      timeline2
-        .set(text1Ref.current, {
-          fontSize: fontSize,
-          y: 350,
-          x: "100%",
-        })
-        .set(text2Ref.current, {
-          fontSize: fontSize,
-          y: 400,
-          x: "100%",
-        })
-        .set(text3Ref.current, {
-          fontSize: fontSize,
-          y: 500,
-          x: "100%",
-        })
-        .to(text1Ref.current, {
-          x: translateX,
-          opacity: 1,
-          duration: 1,
-        })
-        .to(text2Ref.current, {
-          x: translateX,
-          opacity: 1,
-          duration: 1,
-        })
-        .to(text3Ref.current, {
-          x: translateX,
-          opacity: 1,
-          duration: 1,
-          onComplete: () => {
-            setIsCompletedTimeLine2(true);
-          },
-        });
-    }
-  }, [width]);
+    timeline2
+      .set(text1Ref.current, {
+        fontSize: property.fontSize,
+        right: 0,
+        y: 450,
+      })
+      .set(text2Ref.current, {
+        fontSize: property.fontSize,
+        right: 0,
+        y: 500,
+      })
+      .set(text3Ref.current, {
+        fontSize: property.fontSize,
+        right: 0,
+        y: 600,
+      })
+      .to(text1Ref.current, {
+        left: property.left,
+        opacity: 1,
+        duration: 1,
+      }, 0)
+      .to(text2Ref.current, {
+        left: property.left,
+        opacity: 1,
+        duration: 1,
+      }, 0.1)
+      .to(text3Ref.current, {
+        left: property.left,
+        opacity: 1,
+        duration: 1,
+      }, 0.2)
+      .restart();
+  }, [property]);
 
   return (
     <GlobalWrapper ref={appRef}>
+      <TempBox>tempbox</TempBox>
       <OneMain ref={oneRef}>
-       <Tsparticles />
+        <Tsparticles />
 
         <PortFolioTextLogo>PortFolio</PortFolioTextLogo>
         <OneText ref={text1Ref}>CHOI BOSUNG</OneText>
@@ -204,10 +180,8 @@ const App = () => {
       </OneMain>
 
       {/* <TwoMain></TwoMain> */}
-      <SvgTest />
-      <TempBox>
-      </TempBox>
-     
+      {/* <SvgTest /> */}
+      <SvgTest2 />
     </GlobalWrapper>
   );
 };

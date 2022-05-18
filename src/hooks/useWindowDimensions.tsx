@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { debounce } from "lodash";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
@@ -16,6 +17,7 @@ export default function useWindowDimensions() {
 
   useEffect(() => {
     const handleResize = debounce(() => {
+      ScrollTrigger.refresh();
       setWindowDimensions(getWindowDimensions());
     }, 500);
 
