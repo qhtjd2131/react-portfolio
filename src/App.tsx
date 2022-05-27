@@ -6,11 +6,7 @@ import Tsparticles from "./components/tsparticles";
 import { useCustomHeight } from "./hooks/useCustomHeight";
 import useWindowDimensions from "./hooks/useWindowDimensions";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-import mainBackground from "./images/main_bg.jpg";
-import SvgTest from "./components/SvgTest";
-import SvgTest2 from "./components/SvgTest2";
 import ScrollNav from "./components/ScrollNav";
-import ScrollNav2 from "./components/ScrollNav2";
 import { ScrollToPlugin } from "gsap/all";
 
 const GlobalWrapper = styled.div`
@@ -22,12 +18,8 @@ const GlobalWrapper = styled.div`
 `;
 
 const OneMain = styled.div`
-  /* background-image: url(${mainBackground});
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center; */
+
   background-color: #232323;
-  /* position: fixed; */
   width: 300%;
   height: calc(var(--vh) * 100);
 `;
@@ -219,12 +211,9 @@ const App = () => {
 
   return (
     <GlobalWrapper ref={appRef}>
-      {/* <ScrollNav /> */}
-      <ScrollNav2 />
-      {/* <TempBox>tempbox</TempBox> */}
+      <ScrollNav />
       <OneMain id="main" ref={oneRef}>
         <Tsparticles />
-
         <PortFolioTextLogo>PortFolio</PortFolioTextLogo>
         <OneText ref={text1Ref}>CHOI BOSUNG</OneText>
         <OneText ref={text2Ref}>1996/09</OneText>
@@ -240,9 +229,7 @@ const App = () => {
         3
       </TempBox>
 
-      {/* <TwoMain></TwoMain> */}
-      {/* <SvgTest /> */}
-      {/* <SvgTest2 /> */}
+    
     </GlobalWrapper>
   );
 };

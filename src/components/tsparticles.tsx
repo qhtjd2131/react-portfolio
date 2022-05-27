@@ -1,9 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import { Container, Engine } from "tsparticles-engine";
-
 
 const Tsparticles = () => {
   const particlesInit = async (main: Engine): Promise<void> => {
@@ -31,7 +29,7 @@ const Tsparticles = () => {
             enable: true,
             color: "#c5c5c5",
             distance: 200,
-            opacity : 0.5,
+            opacity: 0.5,
           },
           move: {
             direction: "none",
@@ -46,13 +44,8 @@ const Tsparticles = () => {
           opacity: {
             value: 0.5,
           },
-          
-        }, detectRetina : true
-      }}
-      style={{
-        // width: "300%",
-
-        // position : "fixed",
+        },
+        detectRetina: true,
       }}
     />
   );
