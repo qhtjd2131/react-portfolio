@@ -5,12 +5,13 @@ import styled from "styled-components";
 import Tsparticles from "./components/tsparticles";
 import { useCustomHeight } from "./hooks/useCustomHeight";
 import useWindowDimensions from "./hooks/useWindowDimensions";
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 import mainBackground from "./images/main_bg.jpg";
 import SvgTest from "./components/SvgTest";
 import SvgTest2 from "./components/SvgTest2";
 import ScrollNav from "./components/ScrollNav";
 import ScrollNav2 from "./components/ScrollNav2";
+import { ScrollToPlugin } from "gsap/all";
 
 const GlobalWrapper = styled.div`
   width: 100%;
@@ -26,7 +27,7 @@ const OneMain = styled.div`
   background-size: cover;
   background-position: center; */
   background-color: #232323;
-  position: fixed;
+  /* position: fixed; */
   width: 300%;
   height: calc(var(--vh) * 100);
 `;
@@ -67,17 +68,18 @@ const TempBox = styled.div`
   width: 100%;
   height: calc(var(--vh) * 100);
   background-color: transparent;
-  display : flex;
-  justify-content  :center;
-  align-items : center;
-  font-size : 40px;
-  box-sizing : border-box;
-  border : 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  background-color: white;
 `;
 
 const App = () => {
   const { width, height } = useWindowDimensions();
-   useCustomHeight();
+  useCustomHeight();
 
   const [property, setProperty] = useState({
     fontSize: "0px",
@@ -89,6 +91,11 @@ const App = () => {
   const text2Ref = useRef(null);
   const text3Ref = useRef(null);
   const appRef = useRef(null);
+
+  const tempRef1 = useRef(null);
+  const tempRef2 = useRef(null);
+  const tempRef3 = useRef(null);
+
   const timeline1: gsap.core.Timeline = gsap.timeline({
     defaults: {
       ease: "power3.inOut",
@@ -100,11 +107,12 @@ const App = () => {
       ease: "power3.inOut",
     },
   });
- 
+
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
     ScrollTrigger.refresh();
   }, []);
+
   //반응형 effect
   useEffect(() => {
     setProperty(() => {
@@ -134,15 +142,32 @@ const App = () => {
         trigger: oneRef.current,
         scrub: true,
         start: "bottom bottom",
+     
+        pin: true,
         markers: false,
+        pinSpacing: false,
+        // snap: 1,
       },
       autoAlpha: 0,
-      position: "fixed",
+      // position: "fixed",
       // scale: 2.5,
       onStart: () => {
         console.log("animation start");
       },
     });
+
+    gsap.utils
+      .toArray([tempRef1.current, tempRef2.current, tempRef3.current])
+      .forEach((tempRef: any) => {
+        ScrollTrigger.create({
+          trigger: tempRef,
+          start: "top top",
+          // pin: true,
+          // snap: 1,
+          // pinSpacing : "20%",
+          pinSpacing: false,
+        });
+      });
   }, []);
 
   useEffect(() => {
@@ -196,8 +221,8 @@ const App = () => {
     <GlobalWrapper ref={appRef}>
       {/* <ScrollNav /> */}
       <ScrollNav2 />
-      <TempBox>tempbox</TempBox>
-      <OneMain ref={oneRef}>
+      {/* <TempBox>tempbox</TempBox> */}
+      <OneMain id="main" ref={oneRef}>
         <Tsparticles />
 
         <PortFolioTextLogo>PortFolio</PortFolioTextLogo>
@@ -205,9 +230,15 @@ const App = () => {
         <OneText ref={text2Ref}>1996/09</OneText>
         <OneText ref={text3Ref}>FRONTEND DEVELOPER</OneText>
       </OneMain>
-    <TempBox> 1 </TempBox>
-    <TempBox> 2 </TempBox>
-    <TempBox> 3 </TempBox>
+      <TempBox id="temp1" ref={tempRef1}>
+        1
+      </TempBox>
+      <TempBox id="temp2" ref={tempRef2}>
+        2
+      </TempBox>
+      <TempBox id="temp3" ref={tempRef3}>
+        3
+      </TempBox>
 
       {/* <TwoMain></TwoMain> */}
       {/* <SvgTest /> */}

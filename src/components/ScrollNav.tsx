@@ -70,6 +70,11 @@ const ScrollNav = (props: ScrollNavProps) => {
     height: "50%",
   };
 
+
+  useEffect(() => {
+    console.log("rerender");
+  });
+  
   useEffect(() => {
     setScrollHeight(height * Constants.PAGE_COUNT);
   });

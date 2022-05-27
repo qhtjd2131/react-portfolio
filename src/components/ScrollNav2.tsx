@@ -1,12 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import useWindowDimensions from "../hooks/useWindowDimensions";
-import * as Constants from "../constants";
+import useSetNavLink from "../hooks/useSetNavLink";
 
 const ScrollNavBox = styled.div`
   position: fixed;
-  width: 60px;
   height: 800px;
   display: flex;
   flex-direction: column;
@@ -21,21 +18,6 @@ const ScrollNavBox = styled.div`
   opacity: 1;
 `;
 
-const NavButton = styled.button`
-  border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  background-color: #e5e5e5;
-  color: gray;
-  cursor: pointer;
-  &:hover {
-    /* background-color: gray; */
-  }
-`;
-
-const UpButton = styled(NavButton)``;
-const DownButton = styled(NavButton)``;
 
 const ContentsWrapper = styled.div`
   display: flex;
@@ -63,31 +45,41 @@ const FrontPath = styled.div`
 
 const TextWrapper = styled.div`
   height: 100%;
-  display : flex;
-  flex-direction :column;
-  justify-content : space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
-const SectionText = styled.h1`
+const SectionLink = styled.a`
+  font-size: 20px;
+  cursor: pointer;
 `;
-
 interface ScrollNavProps {}
 const ScrollNav2 = (props: ScrollNavProps) => {
-  const { width, height } = useWindowDimensions();
+  useEffect(() => {
+    console.log("rerender");
+  });
 
   const frontPathRef = useRef(null);
   const backPathRef = useRef(null);
-  const iconStyle = {
-    width: "50%",
-    height: "50%",
-  };
+  const SectionLinkRef0 = useRef<HTMLAnchorElement>(null);
+  const SectionLinkRef1 = useRef<HTMLAnchorElement>(null);
+  const SectionLinkRef2 = useRef<HTMLAnchorElement>(null);
+  const SectionLinkRef3 = useRef<HTMLAnchorElement>(null);
+
+  useSetNavLink([
+    SectionLinkRef0,
+    SectionLinkRef1,
+    SectionLinkRef2,
+    SectionLinkRef3,
+  ]);
 
   useEffect(() => {
     gsap.to(frontPathRef.current, {
       scrollTrigger: {
         trigger: document.body,
         start: "top top",
-        end: "75% top",
+        end: "75% top", // page가 4개라서 75%임. 5개면 80%
         markers: true,
         scrub: true,
       },
@@ -96,11 +88,40 @@ const ScrollNav2 = (props: ScrollNavProps) => {
     });
   }, []);
 
+  useEffect(() => {
+    gsap
+      .timeline()
+      .to(SectionLinkRef1.current, {
+        scrollTrigger: {
+          trigger: document.body,
+          start: `24% top`,
+          markers: true,
+          toggleActions: "play pause reserve reset",
+        },
+        fontWeight: 600,
+      })
+      .to(SectionLinkRef2.current, {
+        scrollTrigger: {
+          trigger: document.body,
+          start: `49% top`,
+          markers: true,
+          toggleActions: "play pause reserve reset",
+        },
+        fontWeight: 600,
+      })
+      .to(SectionLinkRef3.current, {
+        scrollTrigger: {
+          trigger: document.body,
+          start: `74% top`,
+          markers: true,
+          toggleActions: "play pause reserve reset",
+        },
+        fontWeight: 600,
+      });
+  }, []);
+
   return (
     <ScrollNavBox>
-      {/* <UpButton>
-        <IoIosArrowUp style={iconStyle} />
-      </UpButton> */}
       <ContentsWrapper>
         <SectionWrapper>
           <BackPath ref={backPathRef}>
@@ -108,17 +129,14 @@ const ScrollNav2 = (props: ScrollNavProps) => {
           </BackPath>
         </SectionWrapper>
         <TextWrapper>
-          <SectionText>00000</SectionText>
-
-          <SectionText>11111</SectionText>
-          <SectionText>22222</SectionText>
-          <SectionText>33333</SectionText>
+          <SectionLink ref={SectionLinkRef0} style={{ fontWeight: "600" }}>
+            00000
+          </SectionLink>
+          <SectionLink ref={SectionLinkRef1}>11111</SectionLink>
+          <SectionLink ref={SectionLinkRef2}>22222</SectionLink>
+          <SectionLink ref={SectionLinkRef3}>33333</SectionLink>
         </TextWrapper>
       </ContentsWrapper>
-
-      {/* <DownButton>
-        <IoIosArrowDown style={iconStyle} />
-      </DownButton> */}
     </ScrollNavBox>
   );
 };

@@ -1,6 +1,8 @@
 html, body, #root {
     width : 100%;
 	font-family: "Helvetica Neue, " Helvetica ", " "arial";
+	scroll-behavior: smooth;
+
 }
 
 html, body, div, span, applet, object, iframe,
