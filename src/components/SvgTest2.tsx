@@ -60,7 +60,7 @@ const Circle = styled.circle`
 const SvgTest2 = () => {
   const { width, height } = useWindowDimensions();
 
-  const vh = window.innerHeight+10+4;
+  const vh = window.innerHeight + 10 + 4;
 
   const svgRef = useRef(null);
   const ball1Ref = useRef(null);
@@ -112,12 +112,8 @@ const SvgTest2 = () => {
           ease: "elastic(2.5, 1)",
         },
       })
-      .to(
-        [ball2Ref.current, text1Ref.current, description1Ref.current],
-        {},
-        0.115
-      )
-      .to([ball3Ref.current, text2Ref.current], {}, 0.208)
+      .to([ball2Ref.current, text1Ref.current, description1Ref.current], {}, 0)
+      .to([ball3Ref.current, text2Ref.current], {}, 0.2)
       .to([ball4Ref.current, text3Ref.current], {}, 0.285)
       .to([ball5Ref.current, text4Ref.current], {}, 0.372)
       .to([ball6Ref.current, text5Ref.current], {}, 0.455)
@@ -179,6 +175,7 @@ const SvgTest2 = () => {
       <Description ref={description1Ref} x="30" y="220">
         hello
       </Description>
+      <div> hell world</div>
 
       <Path2
         ref={path2Ref}
@@ -187,10 +184,10 @@ const SvgTest2 = () => {
         fill="none"
         stroke="black"
       />
-       <Path2
+      <Path2
         ref={tempRef}
         d={`M 50 0 
-        V ${vh * 2 }`}
+        V ${vh * 2}`}
         fill="none"
         stroke="black"
       />
