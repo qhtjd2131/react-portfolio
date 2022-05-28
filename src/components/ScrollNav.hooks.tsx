@@ -1,4 +1,4 @@
-import { RefObject, useEffect } from "react";
+import {  useEffect } from "react";
 import * as constants from "../constants";
 
 export const useSetNavLink = (refArr: HTMLAnchorElement[]) => {

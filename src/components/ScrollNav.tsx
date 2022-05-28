@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, {  useRef } from "react";
 import { useSetLinkAnimation, useSetNavLink, useSetPathAnimaition } from "./scrollNav.hooks";
 import * as constants from "../constants";
 import * as data from "./ScrollNav.data";
@@ -12,9 +12,7 @@ const ScrollNav = (props: ScrollNavProps) => {
 
   useSetNavLink(sectionLinkRefs.current);
   useSetLinkAnimation(sectionLinkRefs.current);
-  
   useSetPathAnimaition(frontPathRef.current);
-
 
   const sectionLinkContents = new Array(constants.PAGE_COUNT)
     .fill(0)
