@@ -1,8 +1,7 @@
-import { useEffect } from "react";
-import * as Constants from "../constants";
+import { RefObject, useEffect } from "react";
+import * as constants from "../constants";
 
 export const useSetNavLink = (refArr: HTMLAnchorElement[]) => {
-  console.log(refArr);
   useEffect(() => {
     const clickHandlerArr = refArr.map((_, index) => {
       const str = "#temp" + index;
@@ -36,7 +35,6 @@ export const useSetLinkAnimation = (refArr: HTMLAnchorElement[]) => {
     refArr.forEach((ref, index) => {
       if (index != 0) {
         const startPosition = (1 / refLen) * 100 * index - 1 + "%";
-        console.log(startPosition);
         const gsapTo = gsap.to(ref, {
           scrollTrigger: {
             trigger: document.body,
@@ -50,6 +48,25 @@ export const useSetLinkAnimation = (refArr: HTMLAnchorElement[]) => {
       }
     });
   }, []);
+};
+
+export const useSetPathAnimaition = (pathRef: HTMLDivElement | null) => {
+  useEffect(() => {
+    if (pathRef != null) {
+      const endPosition = 100 - (1 / constants.PAGE_COUNT) * 100 + "%";
+      gsap.to(pathRef, {
+        scrollTrigger: {
+          trigger: document.body,
+          start: "top top",
+          end: `${endPosition} top`, // page가 4개라서 75%임. 5개면 80%
+          markers: true,
+          scrub: true,
+        },
+        ease: "none",
+        height: "100%",
+      });
+    }
+  }, [pathRef]);
 };
 
 //Refactoring 타임
