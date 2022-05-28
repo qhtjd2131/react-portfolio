@@ -1,12 +1,13 @@
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import ScrollToPlugin from "gsap/ScrollToPlugin";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useCustomHeight } from "./hooks/useCustomHeight";
-import useWindowDimensions from "./hooks/useWindowDimensions";
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 import ScrollNav from "./components/ScrollNav";
-import { ScrollToPlugin } from "gsap/all";
+import Main from "./pages/Main";
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
 
 const GlobalWrapper = styled.div`
   width: 100%;
@@ -16,11 +17,6 @@ const GlobalWrapper = styled.div`
   /* overflow: hidden; */
 `;
 
-const TwoMain = styled.div`
-  width: 100%;
-  height: calc(var(--vh) * 100);
-  background-color: #e5e5e5;
-`;
 
 const TempBox = styled.div`
   width: 100%;
@@ -37,10 +33,8 @@ const TempBox = styled.div`
 
 const App = () => {
   useCustomHeight();
-
  
   const appRef = useRef(null);
-
   const tempRef1 = useRef(null);
   const tempRef2 = useRef(null);
   const tempRef3 = useRef(null);
@@ -63,6 +57,7 @@ const App = () => {
   return (
     <GlobalWrapper ref={appRef}>
       <ScrollNav />
+      <Main />
 
       <TempBox id="temp1" ref={tempRef1}>
         1

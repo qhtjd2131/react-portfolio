@@ -4,8 +4,7 @@ import * as constants from "../constants";
 import * as data from "./ScrollNav.data";
 import * as style from "./ScrollNav.style";
 
-interface ScrollNavProps {}
-const ScrollNav = (props: ScrollNavProps) => {
+const ScrollNav = () => {
   const frontPathRef = useRef<HTMLDivElement>(null);
   const backPathRef = useRef<HTMLDivElement>(null);
   const sectionLinkRefs = useRef<HTMLAnchorElement[]>([]);
@@ -19,6 +18,7 @@ const ScrollNav = (props: ScrollNavProps) => {
     .map((_, index) => {
       return (
         <style.SectionLink
+          key={index}
           ref={(el: HTMLAnchorElement) => {
             sectionLinkRefs.current[index] = el;
           }}
