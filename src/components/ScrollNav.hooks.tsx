@@ -1,7 +1,8 @@
 import { useEffect } from "react";
+import * as Constants from "../constants";
 
-export const useSetNavLink = (refArr: React.RefObject<HTMLAnchorElement>[]) => {
-
+export const useSetNavLink = (refArr: HTMLAnchorElement[]) => {
+  console.log(refArr);
   useEffect(() => {
     const clickHandlerArr = refArr.map((_, index) => {
       const str = "#temp" + index;
@@ -17,57 +18,39 @@ export const useSetNavLink = (refArr: React.RefObject<HTMLAnchorElement>[]) => {
     });
 
     refArr.forEach((ref, index) => {
-      ref.current?.addEventListener("click", clickHandlerArr[index]);
+      ref.addEventListener("click", clickHandlerArr[index]);
     });
 
     return () => {
       refArr.forEach((ref, index) => {
-        ref.current?.removeEventListener("click", clickHandlerArr[index]);
+        ref.removeEventListener("click", clickHandlerArr[index]);
       });
-
     };
   }, []);
 };
 
-export const useSetLinkAnimation = (
-  refArr: React.RefObject<HTMLAnchorElement>[]
-) => {
-  const [SectionLinkRef0, SectionLinkRef1, SectionLinkRef2, SectionLinkRef3] =
-    refArr;
+export const useSetLinkAnimation = (refArr: HTMLAnchorElement[]) => {
   useEffect(() => {
-    gsap
-      .timeline()
-      .to(SectionLinkRef1.current, {
-        scrollTrigger: {
-          trigger: document.body,
-          start: `24% top`,
-          markers: true,
-          toggleActions: "play pause reserve reset",
-        },
-        fontWeight: 600,
-      })
-      .to(SectionLinkRef2.current, {
-        scrollTrigger: {
-          trigger: document.body,
-          start: `49% top`,
-          markers: true,
-          toggleActions: "play pause reserve reset",
-        },
-        fontWeight: 600,
-      })
-      .to(SectionLinkRef3.current, {
-        scrollTrigger: {
-          trigger: document.body,
-          start: `74% top`,
-          markers: true,
-          toggleActions: "play pause reserve reset",
-        },
-        fontWeight: 600,
-      });
+    const timeline = gsap.timeline();
+    const refLen = refArr.length;
+    refArr.forEach((ref, index) => {
+      if (index != 0) {
+        const startPosition = (1 / refLen) * 100 * index - 1 + "%";
+        console.log(startPosition);
+        const gsapTo = gsap.to(ref, {
+          scrollTrigger: {
+            trigger: document.body,
+            start: `${startPosition} top`,
+            markers: true,
+            toggleActions: "play pause reserve reset",
+          },
+          fontWeight: 600,
+        });
+        timeline.add(gsapTo);
+      }
+    });
   }, []);
 };
-
-
 
 //Refactoring 타임
 
@@ -76,3 +59,5 @@ export const useSetLinkAnimation = (
 // side bar navigation 컴포넌트를 디자인하고 구현하자.
 
 // 코드컨벤션에 맞춰서 구조를 짜보자.
+
+//  페이지 수가 늘었을 때 변수 하나만 변경해도 적용되게 만들어 보자.

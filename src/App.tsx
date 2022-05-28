@@ -49,12 +49,7 @@ const TwoMain = styled.div`
   background-color: #e5e5e5;
 `;
 
-const TwoText = styled.div`
-  font-size: 36px;
-  color: black;
-  font-weight: 500;
-  visibility: hidden;
-`;
+
 
 const TempBox = styled.div`
   width: 100%;
@@ -101,7 +96,6 @@ const App = () => {
   });
 
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
     ScrollTrigger.refresh();
   }, []);
 

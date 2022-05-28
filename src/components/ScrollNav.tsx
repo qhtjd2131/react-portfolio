@@ -57,23 +57,12 @@ interface ScrollNavProps {}
 const ScrollNav = (props: ScrollNavProps) => {
   const frontPathRef = useRef(null);
   const backPathRef = useRef(null);
-  const SectionLinkRef0 = useRef<HTMLAnchorElement>(null);
-  const SectionLinkRef1 = useRef<HTMLAnchorElement>(null);
-  const SectionLinkRef2 = useRef<HTMLAnchorElement>(null);
-  const SectionLinkRef3 = useRef<HTMLAnchorElement>(null);
 
-  useSetNavLink([
-    SectionLinkRef0,
-    SectionLinkRef1,
-    SectionLinkRef2,
-    SectionLinkRef3,
-  ]);
-  useSetLinkAnimation([
-    SectionLinkRef0,
-    SectionLinkRef1,
-    SectionLinkRef2,
-    SectionLinkRef3,
-  ]);
+
+  const sectionLinkRefs = useRef<HTMLAnchorElement[]>([]);
+  
+  useSetNavLink(sectionLinkRefs.current);
+  useSetLinkAnimation(sectionLinkRefs.current);
 
   useEffect(() => {
     gsap.to(frontPathRef.current, {
@@ -98,12 +87,41 @@ const ScrollNav = (props: ScrollNavProps) => {
           </BackPath>
         </SectionWrapper>
         <TextWrapper>
-          <SectionLink ref={SectionLinkRef0} style={{ fontWeight: "600" }}>
+          {/* <SectionLink ref={SectionLinkRef0} style={{ fontWeight: "600" }}>
             MAIN
           </SectionLink>
           <SectionLink ref={SectionLinkRef1}>PAGE 1</SectionLink>
           <SectionLink ref={SectionLinkRef2}>PAGE 2</SectionLink>
-          <SectionLink ref={SectionLinkRef3}>PAGE 3</SectionLink>
+          <SectionLink ref={SectionLinkRef3}>PAGE 3</SectionLink> */}
+          <SectionLink
+            ref={(el: HTMLAnchorElement) => {
+              sectionLinkRefs.current[0] = el;
+            }}
+            style={{ fontWeight: "600" }}
+          >
+            MAIN
+          </SectionLink>
+          <SectionLink
+            ref={(el: HTMLAnchorElement) => {
+              sectionLinkRefs.current[1] = el;
+            }}
+          >
+            PAGE 1
+          </SectionLink>
+          <SectionLink
+            ref={(el: HTMLAnchorElement) => {
+              sectionLinkRefs.current[2] = el;
+            }}
+          >
+            PAGE 2
+          </SectionLink>
+          <SectionLink
+            ref={(el: HTMLAnchorElement) => {
+              sectionLinkRefs.current[3] = el;
+            }}
+          >
+            PAGE 3
+          </SectionLink>
         </TextWrapper>
       </ContentsWrapper>
     </ScrollNavBox>
