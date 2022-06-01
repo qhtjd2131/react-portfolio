@@ -1,15 +1,20 @@
-import React, {  useEffect, useRef } from "react";
-import {  useSetLinkAnimation, useSetNavLink, useSetPathAnimaition } from "./scrollNav.hooks";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
+import {
+  useSetLinkAnimation,
+  useSetNavLink,
+  useSetPathAnimaition,
+} from "./scrollNav.hooks";
 import * as constants from "../constants";
 import * as data from "./ScrollNav.data";
 import * as style from "./ScrollNav.style";
 
 const ScrollNav = () => {
   const sectionLinkRefs = useRef<HTMLAnchorElement[]>([]);
+  const frontPathRef = useRef<HTMLDivElement>(null);
 
-  useSetNavLink(sectionLinkRefs.current);
-  useSetLinkAnimation(sectionLinkRefs.current);
-  useSetPathAnimaition();
+  useSetPathAnimaition(frontPathRef);
+  useSetNavLink(sectionLinkRefs);
+  useSetLinkAnimation(sectionLinkRefs);
 
 
   const sectionLinkContents = new Array(constants.PAGE_COUNT)
@@ -28,13 +33,15 @@ const ScrollNav = () => {
       );
     });
 
-    
   return (
     <style.ScrollNavBox>
       <style.ContentsWrapper>
         <style.SectionWrapper>
-          <style.BackPath  >
-            <style.FrontPath id="frontPath"/>
+          <style.BackPath>
+            <style.FrontPath
+              ref={frontPathRef}
+              id="frontPath"
+            ></style.FrontPath>
           </style.BackPath>
         </style.SectionWrapper>
         <style.TextWrapper>{sectionLinkContents}</style.TextWrapper>

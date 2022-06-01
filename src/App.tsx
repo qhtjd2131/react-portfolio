@@ -56,8 +56,8 @@ const App = () => {
 
   return (
     <GlobalWrapper ref={appRef}>
-      <ScrollNav />
       <Main />
+      <ScrollNav />
 
       <TempBox id="temp1" ref={tempRef1}>
         1

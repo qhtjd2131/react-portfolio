@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import gsap from "gsap";
 
-export const useSetMainAnimation = (mainRef: HTMLDivElement | null) => {
+export const useSetMainAnimation = (mainRef: React.RefObject<HTMLDivElement>) => {
   useEffect(() => {
-    console.log("mainREF:", mainRef)
-    if (mainRef != null) {
-      console.log("hi");
-      gsap.to(mainRef, {
+    // console.log("mainRef : ", mainRef)
+    if (mainRef.current != null) {
+      gsap.to(mainRef.current, {
         scrollTrigger: {
           id: "background",
-          trigger: mainRef,
+          trigger: mainRef.current,
           scrub: true,
           start: "bottom bottom",
           pin: true,
@@ -23,7 +22,7 @@ export const useSetMainAnimation = (mainRef: HTMLDivElement | null) => {
   }, [mainRef]);
 };
 
-export const useSetMainTextAnimation = (textRefs: HTMLDivElement[]) => {
+export const useSetMainTextAnimation = (textRefs:React.MutableRefObject<HTMLDivElement[]>) => {
   const [property, setProperty] = useState({
     fontSize: "0px",
     left: 0,
@@ -61,7 +60,7 @@ export const useSetMainTextAnimation = (textRefs: HTMLDivElement[]) => {
     timeline.clear();
 
     const positionYArr = [450, 500, 600];
-    textRefs.forEach((ref, index) => {
+    textRefs.current.forEach((ref, index) => {
       const gsapSet = gsap.set(ref, {
         fontSize: property.fontSize,
         right: 0,
@@ -71,7 +70,7 @@ export const useSetMainTextAnimation = (textRefs: HTMLDivElement[]) => {
       timeline.add(gsapSet);
     });
 
-    textRefs.forEach((ref, index) => {
+    textRefs.current.forEach((ref, index) => {
       const gsapTo = gsap.to(ref, {
         left: property.left,
         opacity: 1,

@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import * as constants from "../constants";
 import gsap from "gsap";
 
-export const useSetNavLink = (refArr: HTMLAnchorElement[]) => {
+export const useSetNavLink = (refArr: React.MutableRefObject<HTMLAnchorElement[]>) => {
   useEffect(() => {
-    const clickHandlerArr = refArr.map((_, index) => {
+    const clickHandlerArr = refArr.current.map((_, index) => {
       const str = "#temp" + index;
       return (e: MouseEvent) => {
         e.preventDefault();
@@ -17,23 +17,23 @@ export const useSetNavLink = (refArr: HTMLAnchorElement[]) => {
       };
     });
 
-    refArr.forEach((ref, index) => {
+    refArr.current.forEach((ref, index) => {
       ref.addEventListener("click", clickHandlerArr[index]);
     });
 
     return () => {
-      refArr.forEach((ref, index) => {
+      refArr.current.forEach((ref, index) => {
         ref.removeEventListener("click", clickHandlerArr[index]);
       });
     };
   }, []);
 };
 
-export const useSetLinkAnimation = (refArr: HTMLAnchorElement[]) => {
+export const useSetLinkAnimation = (refArr: React.MutableRefObject<HTMLAnchorElement[]>) => {
   useEffect(() => {
     const timeline = gsap.timeline();
-    const refLen = refArr.length;
-    refArr.forEach((ref, index) => {
+    const refLen = refArr.current.length;
+    refArr.current.forEach((ref, index) => {
       if (index != 0) {
         const startPosition = (1 / refLen) * 100 * index - 1 + "%";
         const gsapTo = gsap.to(ref, {
@@ -51,14 +51,11 @@ export const useSetLinkAnimation = (refArr: HTMLAnchorElement[]) => {
   }, []);
 };
 
-export const useSetPathAnimaition = () => {
-  console.log("0000");
-  let gsapTo: gsap.core.Tween;
+export const useSetPathAnimaition = (pathRef:React.RefObject<HTMLDivElement>) => {
   useEffect(() => {
-      console.log("hello**********");
-      gsap.killTweensOf("#frontPath");
+    if (pathRef != null) {
       const endPosition = 100 - (1 / constants.PAGE_COUNT) * 100 + "%";
-      gsapTo = gsap.to("#frontPath", {
+      gsap.to(pathRef.current, {
         scrollTrigger: {
           id: "path-animation",
           trigger: document.body,
@@ -70,8 +67,8 @@ export const useSetPathAnimaition = () => {
         ease: "none",
         height: "100%",
       });
-    
-  }, []);
+    }
+  });
 };
 
 //Refactoring 타임
