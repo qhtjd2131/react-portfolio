@@ -4,6 +4,7 @@ import Tsparticles from "../components/Tsparticles";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useSetMainAnimation, useSetMainTextAnimation } from "./Main.hooks";
+import { mainText } from "../information";
 gsap.registerPlugin(ScrollTrigger);
 
 const Main = () => {
@@ -13,9 +14,9 @@ const Main = () => {
   useSetMainAnimation(mainRef.current);
   useSetMainTextAnimation(textRefs.current);
 
-  useLayoutEffect(() => {
-    ScrollTrigger.refresh();
-  }, []);
+  // useLayoutEffect(() => {
+  //   ScrollTrigger.refresh();
+  // }, []);
 
   // const introduceText = {
   //   name : 'CHOI BOSUNG',
@@ -25,17 +26,16 @@ const Main = () => {
 
   //data 를 어떤식으로 저장하고 관리할것인가?
 
-  const introduceText = ["CHOI BOSUNG", "1996/09", "FRONTEND DEVELOPER"];
-  const textContents = new Array(3).fill(0).map((_, index) => {
-    return (
+  const textContents = Object.keys(mainText).map((key : string, index)=>{
+    return(
       <style.OneText
-        key={index}
+        key={key}
         ref={(el: HTMLDivElement) => (textRefs.current[index] = el)}
       >
-        {introduceText[index]}
+        {mainText[key]}
       </style.OneText>
-    );
-  });
+    )
+  })
   return (
     <style.OneMain id="main" ref={mainRef}>
       <Tsparticles />

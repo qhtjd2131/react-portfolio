@@ -35,7 +35,7 @@ export const BackPath = styled.div`
 `;
 export const FrontPath = styled.div`
   width: 4px;
-  height: 0%;
+  height: 1%;
   margin: 0 auto;
   background-color: gray;
 `;

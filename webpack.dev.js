@@ -1,10 +1,8 @@
-const { merge } = require('webpack-merge');
+const { merge } = require("webpack-merge");
 
 const common = require("./webpack.common");
 // const devConfig = merge(common, {});
 // module.exports = devConfig;
-
-
 
 module.exports = merge(common, {
   mode: "development",
@@ -15,6 +13,7 @@ module.exports = merge(common, {
     open: true, //개발 서버 실행 시 브라우저 오픈
     historyApiFallback: true,
     static: "./dist",
+    hot: true,
   },
 });
 

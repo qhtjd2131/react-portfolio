@@ -1,5 +1,6 @@
-import {  useEffect } from "react";
+import { useEffect } from "react";
 import * as constants from "../constants";
+import gsap from "gsap";
 
 export const useSetNavLink = (refArr: HTMLAnchorElement[]) => {
   useEffect(() => {
@@ -39,7 +40,7 @@ export const useSetLinkAnimation = (refArr: HTMLAnchorElement[]) => {
           scrollTrigger: {
             trigger: document.body,
             start: `${startPosition} top`,
-            markers: true,
+            markers: false,
             toggleActions: "play pause reserve reset",
           },
           fontWeight: 600,
@@ -50,12 +51,16 @@ export const useSetLinkAnimation = (refArr: HTMLAnchorElement[]) => {
   }, []);
 };
 
-export const useSetPathAnimaition = (pathRef: HTMLDivElement | null) => {
+export const useSetPathAnimaition = () => {
+  console.log("0000");
+  let gsapTo: gsap.core.Tween;
   useEffect(() => {
-    if (pathRef != null) {
+      console.log("hello**********");
+      gsap.killTweensOf("#frontPath");
       const endPosition = 100 - (1 / constants.PAGE_COUNT) * 100 + "%";
-      gsap.to(pathRef, {
+      gsapTo = gsap.to("#frontPath", {
         scrollTrigger: {
+          id: "path-animation",
           trigger: document.body,
           start: "top top",
           end: `${endPosition} top`, // page가 4개라서 75%임. 5개면 80%
@@ -65,8 +70,8 @@ export const useSetPathAnimaition = (pathRef: HTMLDivElement | null) => {
         ease: "none",
         height: "100%",
       });
-    }
-  }, [pathRef]);
+    
+  }, []);
 };
 
 //Refactoring 타임

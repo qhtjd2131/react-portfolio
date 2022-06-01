@@ -4,7 +4,9 @@ import gsap from "gsap";
 
 export const useSetMainAnimation = (mainRef: HTMLDivElement | null) => {
   useEffect(() => {
+    console.log("mainREF:", mainRef)
     if (mainRef != null) {
+      console.log("hi");
       gsap.to(mainRef, {
         scrollTrigger: {
           id: "background",
@@ -16,16 +18,10 @@ export const useSetMainAnimation = (mainRef: HTMLDivElement | null) => {
           pinSpacing: false,
         },
         autoAlpha: 0,
-
-        onStart: () => {
-          console.log("animation start");
-        },
       });
     }
   }, [mainRef]);
 };
-
-
 
 export const useSetMainTextAnimation = (textRefs: HTMLDivElement[]) => {
   const [property, setProperty] = useState({
@@ -63,7 +59,7 @@ export const useSetMainTextAnimation = (textRefs: HTMLDivElement[]) => {
 
   useEffect(() => {
     timeline.clear();
-    
+
     const positionYArr = [450, 500, 600];
     textRefs.forEach((ref, index) => {
       const gsapSet = gsap.set(ref, {
@@ -85,6 +81,5 @@ export const useSetMainTextAnimation = (textRefs: HTMLDivElement[]) => {
     });
   }, [property]);
 
-  useEffect(() => {
-  }, [property]);
+  useEffect(() => {}, [property]);
 };
