@@ -1,19 +1,19 @@
 import styled from "styled-components";
 
 export const ScrollNavBox = styled.div`
-  position: fixed;
+  /* position: fixed; */
   height: 800px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  top: 50%;
+  /* top: 50%;
   transform: translateY(-50%);
-  left: 20px;
+  left: 20px; */
   background-color: transparent;
-  border-radius: 30px;
-  z-index: 999;
-  opacity: 1;
+  /* border-radius: 30px; */
+  /* z-index: 999; */
+  /* opacity: 1; */
 `;
 
 export const ContentsWrapper = styled.div`

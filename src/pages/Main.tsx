@@ -29,7 +29,6 @@ const Main = () => {
   return (
     <style.OneMain id="main" ref={mainRef}>
       <Tsparticles />
-      <style.PortFolioTextLogo>PortFolio</style.PortFolioTextLogo>
       {textContents}
     </style.OneMain>
   );

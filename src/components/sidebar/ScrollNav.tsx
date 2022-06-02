@@ -4,16 +4,20 @@ import {
   useSetNavLink,
   useSetPathAnimaition,
 } from "./scrollNav.hooks";
-import * as constants from "../constants";
+import * as constants from "../../constants";
 import * as data from "./ScrollNav.data";
 import * as style from "./ScrollNav.style";
 
-const ScrollNav = () => {
+interface ScrollNavProps {
+  pageRefs: React.MutableRefObject<HTMLTableSectionElement[]>
+}
+const ScrollNav = ( props : ScrollNavProps ) => {
   const sectionLinkRefs = useRef<HTMLAnchorElement[]>([]);
   const frontPathRef = useRef<HTMLDivElement>(null);
+  const pageRefs = props.pageRefs;
 
   useSetPathAnimaition(frontPathRef);
-  useSetNavLink(sectionLinkRefs);
+  useSetNavLink(sectionLinkRefs, pageRefs);
   useSetLinkAnimation(sectionLinkRefs);
 
 

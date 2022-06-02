@@ -1,5 +1,6 @@
 
 interface Theme {
+  [index : string ] : string;
   size_4: string;
   size_5: string;
   size_6: string;
@@ -11,6 +12,7 @@ interface Theme {
   size_12: string;
   size_13: string;
   size_14: string;
+  sidebar_width: string;
 }
 const theme : Theme= {
   size_4: "only screen and (max-width: 400px)",
@@ -24,6 +26,7 @@ const theme : Theme= {
   size_12: "only screen and (max-width: 1200px)",
   size_13: "only screen and (max-width: 1300px)",
   size_14: "only screen and (max-width: 1400px)",
+  sidebar_width : "300px",
 };
 
 export default theme;

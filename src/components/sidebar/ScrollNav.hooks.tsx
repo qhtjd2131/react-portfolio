@@ -1,15 +1,18 @@
 import { useEffect } from "react";
-import * as constants from "../constants";
+import * as constants from "../../constants";
 import gsap from "gsap";
 
-export const useSetNavLink = (refArr: React.MutableRefObject<HTMLAnchorElement[]>) => {
+
+export const useSetNavLink = (
+  refArr: React.MutableRefObject<HTMLAnchorElement[]>,
+  pageRefs : React.MutableRefObject<HTMLTableSectionElement[]>
+) => {
   useEffect(() => {
     const clickHandlerArr = refArr.current.map((_, index) => {
-      const str = "#temp" + index;
       return (e: MouseEvent) => {
         e.preventDefault();
         gsap.to(window, {
-          scrollTo: index === 0 ? 0 : str,
+          scrollTo: index === 0 ? 0 : pageRefs.current[index-1],
           duration: 0.5,
           ease: "none",
           delay: 0,
@@ -29,7 +32,9 @@ export const useSetNavLink = (refArr: React.MutableRefObject<HTMLAnchorElement[]
   }, []);
 };
 
-export const useSetLinkAnimation = (refArr: React.MutableRefObject<HTMLAnchorElement[]>) => {
+export const useSetLinkAnimation = (
+  refArr: React.MutableRefObject<HTMLAnchorElement[]>
+) => {
   useEffect(() => {
     const timeline = gsap.timeline();
     const refLen = refArr.current.length;
@@ -51,7 +56,9 @@ export const useSetLinkAnimation = (refArr: React.MutableRefObject<HTMLAnchorEle
   }, []);
 };
 
-export const useSetPathAnimaition = (pathRef:React.RefObject<HTMLDivElement>) => {
+export const useSetPathAnimaition = (
+  pathRef: React.RefObject<HTMLDivElement>
+) => {
   useEffect(() => {
     if (pathRef != null) {
       const endPosition = 100 - (1 / constants.PAGE_COUNT) * 100 + "%";
@@ -80,3 +87,5 @@ export const useSetPathAnimaition = (pathRef:React.RefObject<HTMLDivElement>) =>
 // 코드컨벤션에 맞춰서 구조를 짜보자.
 
 //  페이지 수가 늘었을 때 변수 하나만 변경해도 적용되게 만들어 보자.
+
+// ++ 추가적으로 muterial ui 보고 컴포넌트 디자인하기

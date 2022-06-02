@@ -4,10 +4,11 @@ import ScrollToPlugin from "gsap/ScrollToPlugin";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useCustomHeight } from "./hooks/useCustomHeight";
-import ScrollNav from "./components/ScrollNav";
 import Main from "./pages/Main";
+import * as constants from "./constants";
+import { useSetAppAnimation } from "./App.hooks";
+import SideBar from "./components/sidebar/SideBar";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
 
 const GlobalWrapper = styled.div`
   width: 100%;
@@ -17,9 +18,9 @@ const GlobalWrapper = styled.div`
   /* overflow: hidden; */
 `;
 
-
-const TempBox = styled.div`
-  width: 100%;
+const PageBox = styled.section`
+  width: calc(100% - (${(props) => props.theme.sidebar_width}));
+  margin-left : ${(props) => props.theme.sidebar_width};
   height: calc(var(--vh) * 100);
   background-color: transparent;
   display: flex;
@@ -27,47 +28,34 @@ const TempBox = styled.div`
   align-items: center;
   font-size: 40px;
   box-sizing: border-box;
-  border: 1px solid black;
-  background-color: white;
+  background-color: gray;
 `;
 
 const App = () => {
   useCustomHeight();
- 
-  const appRef = useRef(null);
-  const tempRef1 = useRef(null);
-  const tempRef2 = useRef(null);
-  const tempRef3 = useRef(null);
 
-  useEffect(() => {
-    gsap.utils
-      .toArray([tempRef1.current, tempRef2.current, tempRef3.current])
-      .forEach((tempRef: any) => {
-        ScrollTrigger.create({
-          trigger: tempRef,
-          start: "top top",
-          // pin: true,
-          // snap: 1,
-          // pinSpacing : "20%",
-          pinSpacing: false,
-        });
-      });
-  }, []);
+  const appRef = useRef(null);
+  const pageRefs = useRef<HTMLTableSectionElement[]>([]);
+
+  useSetAppAnimation(pageRefs);
+
+  const pageContents = new Array(constants.PAGE_COUNT - 1)
+    .fill(0)
+    .map((_, index) => {
+      return (
+        <PageBox
+          ref={(el: HTMLTableSectionElement) => (pageRefs.current[index] = el)}
+        >
+          {index + 1}
+        </PageBox>
+      );
+    });
 
   return (
     <GlobalWrapper ref={appRef}>
       <Main />
-      <ScrollNav />
-
-      <TempBox id="temp1" ref={tempRef1}>
-        1
-      </TempBox>
-      <TempBox id="temp2" ref={tempRef2}>
-        2
-      </TempBox>
-      <TempBox id="temp3" ref={tempRef3}>
-        3
-      </TempBox>
+      <SideBar pageRefs={pageRefs} />
+      {pageContents}
     </GlobalWrapper>
   );
 };
