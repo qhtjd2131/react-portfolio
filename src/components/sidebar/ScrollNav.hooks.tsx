@@ -45,7 +45,6 @@ export const useSetLinkAnimation = (
           scrollTrigger: {
             trigger: document.body,
             start: `${startPosition} top`,
-            markers: false,
             toggleActions: "play pause reserve reset",
           },
           fontWeight: 600,
@@ -64,11 +63,9 @@ export const useSetPathAnimaition = (
       const endPosition = 100 - (1 / constants.PAGE_COUNT) * 100 + "%";
       gsap.to(pathRef.current, {
         scrollTrigger: {
-          id: "path-animation",
           trigger: document.body,
           start: "top top",
           end: `${endPosition} top`, // page가 4개라서 75%임. 5개면 80%
-          markers: true,
           scrub: true,
         },
         ease: "none",

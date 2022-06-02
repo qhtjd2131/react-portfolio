@@ -21,11 +21,8 @@ export const useSetAppAnimation = (
             scrollTrigger : {
                 trigger: ref,
                 start: "top top",
-                pin: true,
-                scrub : 1,
                 pinSpacing: false,
             },
-            xPercent : 100 * ( 3 - 1 ),
         })
     })
   }, []);

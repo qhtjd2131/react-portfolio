@@ -8,6 +8,9 @@ import Main from "./pages/Main";
 import * as constants from "./constants";
 import { useSetAppAnimation } from "./App.hooks";
 import SideBar from "./components/sidebar/SideBar";
+import Page1 from "./pages/Page1";
+import Page2 from "./pages/Page2";
+import Page3 from "./pages/Page3";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const GlobalWrapper = styled.div`
@@ -55,7 +58,10 @@ const App = () => {
     <GlobalWrapper ref={appRef}>
       <Main />
       <SideBar pageRefs={pageRefs} />
-      {pageContents}
+      {/* {pageContents} */}
+      <Page1 ref={(el: HTMLTableSectionElement) => (pageRefs.current[0] = el)}/>
+      <Page2 ref={(el: HTMLTableSectionElement) => (pageRefs.current[1] = el)}/>
+      <Page3 ref={(el: HTMLTableSectionElement) => (pageRefs.current[2] = el)}/>
     </GlobalWrapper>
   );
 };

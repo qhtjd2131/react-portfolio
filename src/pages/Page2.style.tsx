@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const PageBox = styled.section`
+export const PageBox = styled.section`
   width: calc(100% - (${(props) => props.theme.sidebar_width}));
   margin-left : ${(props) => props.theme.sidebar_width};
   height: calc(var(--vh) * 100);
@@ -12,3 +12,10 @@ const PageBox = styled.section`
   box-sizing: border-box;
   background-color: white;
 `;
+export const ContentsWrapper = styled.div`
+    width : 100%;
+    height : 100%;
+    box-sizing : border-box;
+    padding : 20px;
+`;
+
