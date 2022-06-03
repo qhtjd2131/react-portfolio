@@ -21,6 +21,7 @@ const GlobalWrapper = styled.div`
   justify-content: flex-start;
   /* overflow: hidden; */
   overflow: hidden;
+  background-color : ${(props)=>props.theme.side_bg_color};
 `;
 
 const PageBox = styled.section`

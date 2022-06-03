@@ -12,7 +12,7 @@ export const PageBox = styled.section`
   align-items: center;
   font-size: 40px;
   box-sizing: border-box;
-  background-color: white;
+  background-color: ${(props) => props.theme.main_bg_color};
   overflow: hidden;
 `;
 
@@ -21,14 +21,6 @@ export const ContentsWrapper = styled.div`
   height: 100%;
   box-sizing: border-box;
   padding: 40px;
-`;
-
-export const SectionDivider = styled.div`
-  width: 0%;
-  height: 3px;
-  padding: 0;
-  margin: 5px 0;
-  background-color: gray;
 `;
 
 export const BodySection = styled.div`

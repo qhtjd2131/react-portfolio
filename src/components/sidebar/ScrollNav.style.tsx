@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const ScrollNavBox = styled.div`
   /* position: fixed; */
-  height: 800px;
+  height: 400px;
+  /* max-height  : 500px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +21,7 @@ export const ContentsWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 600px;
+  height: 100%;
 `;
 export const SectionWrapper = styled.div`
   height: 100%;
@@ -36,9 +37,9 @@ export const BackPath = styled.div`
 `;
 export const FrontPath = styled.div`
   width: 4px;
-  height: 0%;
+  height: 1%;
   margin: 0 auto;
-  background-color: gray;
+  background-color: #519aac;
 `;
 
 export const TextWrapper = styled.div`
@@ -46,9 +47,12 @@ export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+ 
 `;
 
 export const SectionLink = styled.a`
   font-size: 20px;
   cursor: pointer;
+  /* color :#c4c08d; */
+  color : white;
 `;

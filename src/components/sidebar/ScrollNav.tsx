@@ -7,6 +7,7 @@ import {
 import * as constants from "../../constants";
 import * as data from "./ScrollNav.data";
 import * as style from "./ScrollNav.style";
+import theme from "../../style/theme";
 
 interface ScrollNavProps {
   pageRefs: React.MutableRefObject<HTMLTableSectionElement[]>
@@ -30,7 +31,7 @@ const ScrollNav = ( props : ScrollNavProps ) => {
           ref={(el: HTMLAnchorElement) => {
             sectionLinkRefs.current[index] = el;
           }}
-          style={index === 0 ? { fontWeight: "600" } : {}}
+          style={index === 0 ? { fontWeight: "600", color: theme.side_text_color } : {}}
         >
           {data.sectionLabel[index] ? data.sectionLabel[index] : ""}
         </style.SectionLink>

@@ -1,8 +1,8 @@
 import React, { forwardRef, useRef } from "react";
 import HeaderSection from "../components/page/HeaderSection";
+import SectionDivider from "../components/page/SectionDivider";
 import {
   useBodyTextAnimaition,
-  useDividerAnimation,
   useHeaderAnimation,
 } from "./Page1.hooks";
 import * as style from "./Page1.style";
@@ -14,7 +14,6 @@ const Page1 = forwardRef<HTMLTableSectionElement>((props, ref) => {
   const bodyTextRefs = useRef<HTMLDivElement[]>([]);
 
   useHeaderAnimation(headerTextRef);
-  useDividerAnimation(dividerRef);
   useBodyTextAnimaition(bodyTextRefs);
 
   const bodyData = [
@@ -29,8 +28,8 @@ const Page1 = forwardRef<HTMLTableSectionElement>((props, ref) => {
   return (
     <commonStyle.PageBox ref={ref}>
       <commonStyle.ContentsWrapper>
-        <HeaderSection ref={headerTextRef} text={"간단 소개글"}/>
-        <commonStyle.SectionDivider ref={dividerRef} />
+        <HeaderSection ref={headerTextRef} text={"Intro"}/>
+        <SectionDivider />
 
         <commonStyle.BodySection>
           {bodyData.map((text, index) => (

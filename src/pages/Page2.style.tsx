@@ -7,7 +7,10 @@ export const StartDiv = styled.div`
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
   border-radius: 40px;
-  display : flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1600px;
 
   @keyframes gradient {
     0% {
@@ -20,4 +23,41 @@ export const StartDiv = styled.div`
       background-position: 0% 50%;
     }
   }
+`;
+
+export const HyperLinkWrapper = styled.a<{ left: string, zIndex : number}>`
+  width: 60%;
+  position: absolute;
+  transform: rotateY(-45deg);
+  filter: drop-shadow(5px 5px 5px black);
+
+  border-radius: 30px;
+  z-index: ${(props) => props.zIndex && props.zIndex};
+  left: ${(props) => props.left && props.left};
+  bottom: 100px;
+  cursor: pointer;
+  transition: 0.6s;
+  &:hover {
+    transform: rotateY(-45deg) translateY(-100px);
+    filter: drop-shadow(5px 5px 5px white);
+  }
+`;
+
+export const ImageYoutubeDark = styled.img`
+  border-radius: 30px;
+  width: 100%;
+`;
+
+export const ImageYoutubeLight = styled.img`
+  border-radius: 30px;
+  width: 100%;
+`;
+
+export const ImageAirbnb = styled.img`
+  border-radius: 30px;
+  width: 100%;
+`;
+export const ImageStarBucks = styled.img`
+  border-radius: 30px;
+  width: 100%;
 `;

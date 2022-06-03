@@ -11,6 +11,7 @@ const Main = () => {
   const mainRef = useRef<HTMLDivElement>(null);
   const textRefs = useRef<HTMLDivElement[]>([]);
 
+  console.log("mmm");
   useSetMainAnimation(mainRef);
   useSetMainTextAnimation(textRefs);
 

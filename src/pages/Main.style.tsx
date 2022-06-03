@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 export const OneMain = styled.div`
-  background-color: #232323;
+  background-color: ${(props)=>props.theme.main_bg_color};
   width: calc(100% - (${(props) => props.theme.sidebar_width}));
   margin-left: ${(props) => props.theme.sidebar_width};
   height: calc(var(--vh) * 100);
-  overflow : hidden;
+  overflow: hidden;
 `;
-
 
 export const OneText = styled.div`
   font-size: 40px;
@@ -17,4 +16,16 @@ export const OneText = styled.div`
   right: 0;
   opacity: 0;
   white-space: nowrap;
+
+  @media ${(props) => props.theme.size_10} {
+    font-size: 32px;
+  }
+
+  @media ${(props) => props.theme.size_8} {
+    font-size: 24px;
+  }
+
+  @media ${(props) => props.theme.size_6} {
+    font-size: 18px;
+  }
 `;

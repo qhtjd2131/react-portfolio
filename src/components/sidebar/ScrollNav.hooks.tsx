@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import * as constants from "../../constants";
 import gsap from "gsap";
 import { debounce } from "lodash";
+import theme from "../../style/theme";
 
 export const useSetNavLink = (
   refArr: React.MutableRefObject<HTMLAnchorElement[]>,
@@ -36,12 +37,12 @@ export const useSetLinkAnimation = (
   refArr: React.MutableRefObject<HTMLAnchorElement[]>
 ) => {
   useEffect(() => {
-    const timeline = gsap.timeline();
+    // const timeline = gsap.timeline();
     const refLen = refArr.current.length;
     refArr.current.forEach((ref, index) => {
       if (index != 0) {
         const startPosition = (1 / refLen) * 100 * index - 1 + "%";
-        const gsapTo = gsap.to(ref, {
+        gsap.to(ref, {
           scrollTrigger: {
             trigger: document.body,
             start: `${startPosition} top`,
@@ -49,19 +50,18 @@ export const useSetLinkAnimation = (
             // markers : true,
           },
           fontWeight: 600,
+          color: theme.side_text_color,
+          
         });
-        timeline.add(gsapTo);
+        // timeline.add(gsapTo);
       }
     });
   }, []);
 };
 
-
 export const useSetPathAnimaition = (
   pathRef: React.RefObject<HTMLDivElement>
 ) => {
-
-
   // scroll에 따라서 scrub이 변화해야함
   // 하지만 window 객체가 resize 되면 scrub이 정상적으로 동작하지않음.
   // 왜인가?

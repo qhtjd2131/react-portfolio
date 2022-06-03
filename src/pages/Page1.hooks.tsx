@@ -25,21 +25,21 @@ export const useHeaderAnimation = (
   }, []);
 };
 
-export const useDividerAnimation = (ref: React.RefObject<HTMLDivElement>) => {
-  useEffect(() => {
-    gsap.to(ref.current, {
-      scrollTrigger: {
-        trigger: ref.current,
-        start: "bottom bottom",
-        toggleActions: "play pause reserve reset",
-      },
-      duration: 1,
-      delay: 0.2,
-      autoAlpha: 1,
-      width: "100%",
-    });
-  }, []);
-};
+// export const useDividerAnimation = (ref: React.RefObject<HTMLDivElement>) => {
+//   useEffect(() => {
+//     gsap.to(ref.current, {
+//       scrollTrigger: {
+//         trigger: ref.current,
+//         start: "bottom bottom",
+//         toggleActions: "play pause reserve reset",
+//       },
+//       duration: 1,
+//       delay: 0.2,
+//       autoAlpha: 1,
+//       width: "100%",
+//     });
+//   }, []);
+// };
 
 export const useBodyTextAnimaition = (
   refArr: React.MutableRefObject<HTMLDivElement[]>
