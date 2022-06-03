@@ -32,10 +32,11 @@ export const BackPath = styled.div`
   height: 100%;
   background-color: white;
   margin: 0 auto;
+  overflow: hidden;
 `;
 export const FrontPath = styled.div`
   width: 4px;
-  height: 1%;
+  height: 0%;
   margin: 0 auto;
   background-color: gray;
 `;

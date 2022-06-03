@@ -1,20 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as constants from "../../constants";
 import gsap from "gsap";
-
+import { debounce } from "lodash";
+import path from "path/posix";
 
 export const useSetNavLink = (
   refArr: React.MutableRefObject<HTMLAnchorElement[]>,
-  pageRefs : React.MutableRefObject<HTMLTableSectionElement[]>
+  pageRefs: React.MutableRefObject<HTMLTableSectionElement[]>
 ) => {
   useEffect(() => {
     const clickHandlerArr = refArr.current.map((_, index) => {
       return (e: MouseEvent) => {
         e.preventDefault();
         gsap.to(window, {
-          scrollTo: index === 0 ? 0 : pageRefs.current[index-1],
+          scrollTo: index === 0 ? 0 : pageRefs.current[index - 1],
           duration: 0.5,
-          ease: "none",
+          ease: "power3.out",
           delay: 0,
         });
       };
@@ -55,24 +56,56 @@ export const useSetLinkAnimation = (
   }, []);
 };
 
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height,
+  };
+}
 export const useSetPathAnimaition = (
   pathRef: React.RefObject<HTMLDivElement>
 ) => {
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
+
+  useEffect(() => {
+    const handleResize = debounce(() => {
+      //   gsap.killTweensOf(ref.current);
+      setWindowDimensions(getWindowDimensions());
+    }, 500);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+
+
+  // scroll에 따라서 scrub이 변화해야함
+  // 하지만 window 객체가 resize 되면 scrub이 정상적으로 동작하지않음. 
+  // 왜인가?
+  // readme에도 작성해보자
   useEffect(() => {
     if (pathRef != null) {
+      console.log("resize hook");
+
       const endPosition = 100 - (1 / constants.PAGE_COUNT) * 100 + "%";
       gsap.to(pathRef.current, {
         scrollTrigger: {
+          id: "pathRef-controll",
           trigger: document.body,
-          start: "top top",
-          end: `${endPosition} top`, // page가 4개라서 75%임. 5개면 80%
+          start: () => "top top",
+          end: () => `${endPosition} top`, // page가 4개라서 75%임. 5개면 80%
           scrub: true,
+          invalidateOnRefresh: true,
+          markers: true,
         },
         ease: "none",
         height: "100%",
       });
     }
-  });
+  }, [windowDimensions]);
 };
 
 //Refactoring 타임

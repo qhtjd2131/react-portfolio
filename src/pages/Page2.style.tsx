@@ -1,21 +1,22 @@
 import styled from "styled-components";
 
-export const PageBox = styled.section`
-  width: calc(100% - (${(props) => props.theme.sidebar_width}));
-  margin-left : ${(props) => props.theme.sidebar_width};
-  height: calc(var(--vh) * 100);
-  background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 40px;
-  box-sizing: border-box;
-  background-color: white;
-`;
-export const ContentsWrapper = styled.div`
-    width : 100%;
-    height : 100%;
-    box-sizing : border-box;
-    padding : 20px;
-`;
+export const StartDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  border-radius: 40px;
 
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+`;

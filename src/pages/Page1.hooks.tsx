@@ -41,7 +41,6 @@ export const useDividerAnimation = (ref: React.RefObject<HTMLDivElement>) => {
   }, []);
 };
 
-
 export const useBodyTextAnimaition = (
   refArr: React.MutableRefObject<HTMLDivElement[]>
 ) => {
@@ -56,6 +55,7 @@ export const useBodyTextAnimaition = (
         opacity: 0,
         y: 100,
         duration: 1,
+        ease: "power3.out",
       });
     });
   }, []);

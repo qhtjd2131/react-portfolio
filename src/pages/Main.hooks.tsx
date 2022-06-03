@@ -13,7 +13,6 @@ export const useSetMainAnimation = (mainRef: React.RefObject<HTMLDivElement>) =>
           scrub: true,
           start: "bottom bottom",
           pin: true,
-          markers: false,
           pinSpacing: false,
         },
         autoAlpha: 0,

@@ -118,7 +118,6 @@ const SvgTest = () => {
         defaults: { duration: 1 },
         scrollTrigger: {
           id: "inin",
-          markers: true,
           trigger: svgRef.current,
           scrub: true,
           start: "top center",

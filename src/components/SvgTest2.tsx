@@ -126,7 +126,6 @@ const SvgTest2 = () => {
         defaults: { duration: 1 },
         scrollTrigger: {
           id: "inin",
-          markers: true,
           trigger: tempRef.current,
           scrub: 0.5,
           start: "top +=50",

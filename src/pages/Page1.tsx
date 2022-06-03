@@ -1,10 +1,12 @@
 import React, { forwardRef, useRef } from "react";
+import HeaderSection from "../components/page/HeaderSection";
 import {
   useBodyTextAnimaition,
   useDividerAnimation,
   useHeaderAnimation,
 } from "./Page1.hooks";
 import * as style from "./Page1.style";
+import * as commonStyle from "./PageCommon.style";
 
 const Page1 = forwardRef<HTMLTableSectionElement>((props, ref) => {
   const headerTextRef = useRef<HTMLHeadingElement>(null);
@@ -23,18 +25,14 @@ const Page1 = forwardRef<HTMLTableSectionElement>((props, ref) => {
     "Animation에 관심이 있으며, GSAP(GreenSocks)를 사용한 개발 경험이 있습니다.",
   ];
 
-  const headerContent = (
-    <style.HeaderSection>
-      <style.HeaderText ref={headerTextRef}>간단 소개글</style.HeaderText>
-    </style.HeaderSection>
-  );
-  return (
-    <style.PageBox ref={ref}>
-      <style.ContentsWrapper>
-        {headerContent}
-        <style.SectionDivider ref={dividerRef} />
 
-        <style.BodySection>
+  return (
+    <commonStyle.PageBox ref={ref}>
+      <commonStyle.ContentsWrapper>
+        <HeaderSection ref={headerTextRef} text={"간단 소개글"}/>
+        <commonStyle.SectionDivider ref={dividerRef} />
+
+        <commonStyle.BodySection>
           {bodyData.map((text, index) => (
             <style.TextWrapper key={text}>
               <style.BodyText
@@ -44,9 +42,10 @@ const Page1 = forwardRef<HTMLTableSectionElement>((props, ref) => {
               </style.BodyText>
             </style.TextWrapper>
           ))}
-        </style.BodySection>
-      </style.ContentsWrapper>
-    </style.PageBox>
+        </commonStyle.BodySection>
+        
+      </commonStyle.ContentsWrapper>
+    </commonStyle.PageBox>
   );
 });
 

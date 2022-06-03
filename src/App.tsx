@@ -11,6 +11,7 @@ import SideBar from "./components/sidebar/SideBar";
 import Page1 from "./pages/Page1";
 import Page2 from "./pages/Page2";
 import Page3 from "./pages/Page3";
+import useWindowDimensions from "./hooks/useWindowDimensions";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const GlobalWrapper = styled.div`
@@ -19,11 +20,12 @@ const GlobalWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   /* overflow: hidden; */
+  overflow: hidden;
 `;
 
 const PageBox = styled.section`
   width: calc(100% - (${(props) => props.theme.sidebar_width}));
-  margin-left : ${(props) => props.theme.sidebar_width};
+  margin-left: ${(props) => props.theme.sidebar_width};
   height: calc(var(--vh) * 100);
   background-color: transparent;
   display: flex;
@@ -37,12 +39,13 @@ const PageBox = styled.section`
 const App = () => {
   useCustomHeight();
 
+  const { width, height } = useWindowDimensions();
   const appRef = useRef(null);
   const pageRefs = useRef<HTMLTableSectionElement[]>([]);
 
   useSetAppAnimation(pageRefs);
 
-  const pageContents = new Array(constants.PAGE_COUNT - 1)
+  const pageContents2 = new Array(constants.PAGE_COUNT - 1)
     .fill(0)
     .map((_, index) => {
       return (
@@ -54,14 +57,24 @@ const App = () => {
       );
     });
 
+  useEffect(() => {}, [width, height]);
+
   return (
     <GlobalWrapper ref={appRef}>
       <Main />
       <SideBar pageRefs={pageRefs} />
       {/* {pageContents} */}
-      <Page1 ref={(el: HTMLTableSectionElement) => (pageRefs.current[0] = el)}/>
-      <Page2 ref={(el: HTMLTableSectionElement) => (pageRefs.current[1] = el)}/>
-      <Page3 ref={(el: HTMLTableSectionElement) => (pageRefs.current[2] = el)}/>
+
+      {/* 각각이 다른 컴포넌트이기 때문에 MAP 을 사용할 수 없음 */}
+      <Page1
+        ref={(el: HTMLTableSectionElement) => (pageRefs.current[0] = el)}
+      />
+      <Page2
+        ref={(el: HTMLTableSectionElement) => (pageRefs.current[1] = el)}
+      />
+      <Page3
+        ref={(el: HTMLTableSectionElement) => (pageRefs.current[2] = el)}
+      />
     </GlobalWrapper>
   );
 };

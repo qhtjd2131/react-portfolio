@@ -83,7 +83,6 @@ const SvgTest3 = () => {
         defaults: { duration: 1 },
         scrollTrigger: {
           id: "inin",
-          markers: true,
           
           scrub: 1,
           start: "top top",

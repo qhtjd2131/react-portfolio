@@ -2,8 +2,10 @@ import styled from "styled-components";
 
 export const OneMain = styled.div`
   background-color: #232323;
-  width: 100%;
+  width: calc(100% - (${(props) => props.theme.sidebar_width}));
+  margin-left: ${(props) => props.theme.sidebar_width};
   height: calc(var(--vh) * 100);
+  overflow : hidden;
 `;
 
 
