@@ -25,21 +25,46 @@ export const HeaderSection = styled.section`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: 100px;
+  height: ${(props) => props.theme.page_header_height};
   box-sizing: border-box;
   padding: 4px;
 `;
 
 export const HeaderText = styled.h1`
   font-size: 40px;
-  /* border-bottom: 1px solid gray; */
   letter-spacing: 1px;
 `;
 
 export const SectionDivider = styled.div`
-    width : 0%;
-    height : 3px;
-    padding : 0;
-    margin : 5px 0;
-    background-color : gray;
+  width: 0%;
+  height: 3px;
+  padding: 0;
+  margin: 5px 0;
+  background-color: gray;
+`;
+
+export const BodySection = styled.div`
+  width: 100%;
+  height: calc(
+    100% - (${(props) => props.theme.page_header_height}) - 13px
+  ); //13px is divider height
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const BodyText = styled.div`
+  font-size: 26px;
+  letter-spacing: 2px;
+  width: 100%;
+  line-height: 36px;
+  margin: 20px 0;
+  font-weight : 600;
+  opacity :1;
+`;
+
+export const TextWrapper = styled.div`
+    width : 100%;
+    /* overflow : hidden; */
 `;

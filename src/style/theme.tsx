@@ -13,6 +13,7 @@ interface Theme {
   size_13: string;
   size_14: string;
   sidebar_width: string;
+  page_header_height : string;
 }
 const theme : Theme= {
   size_4: "only screen and (max-width: 400px)",
@@ -27,6 +28,7 @@ const theme : Theme= {
   size_13: "only screen and (max-width: 1300px)",
   size_14: "only screen and (max-width: 1400px)",
   sidebar_width : "300px",
+  page_header_height : "100px",
 };
 
 export default theme;

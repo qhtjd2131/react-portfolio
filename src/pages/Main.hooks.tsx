@@ -79,6 +79,4 @@ export const useSetMainTextAnimation = (textRefs:React.MutableRefObject<HTMLDivE
       timeline.add(gsapTo, 0.1 * (index + 1));
     });
   }, [property]);
-
-  useEffect(() => {}, [property]);
 };

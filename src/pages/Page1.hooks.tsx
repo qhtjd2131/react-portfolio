@@ -1,4 +1,7 @@
 import { useEffect } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 export const useHeaderAnimation = (
   ref: React.RefObject<HTMLHeadingElement>
@@ -13,31 +16,47 @@ export const useHeaderAnimation = (
       scrollTrigger: {
         trigger: ref.current,
         start: "bottom bottom",
-        markers: true,
         toggleActions: "play pause reserve reset",
       },
       duration: 1,
-      delay : 0.2,
+      delay: 0.2,
       autoAlpha: 1,
     });
   }, []);
 };
 
-export const useDividerAnimation = (ref : React.RefObject<HTMLDivElement>) => {
+export const useDividerAnimation = (ref: React.RefObject<HTMLDivElement>) => {
+  useEffect(() => {
+    gsap.to(ref.current, {
+      scrollTrigger: {
+        trigger: ref.current,
+        start: "bottom bottom",
+        toggleActions: "play pause reserve reset",
+      },
+      duration: 1,
+      delay: 0.2,
+      autoAlpha: 1,
+      width: "100%",
+    });
+  }, []);
+};
 
-    useEffect(()=>{ 
-        gsap.to(ref.current, {
-            scrollTrigger: {
-                trigger: ref.current,
-                start: "bottom bottom",
-                markers: true,
-                toggleActions: "play pause reserve reset",
-              },
-              duration: 1,
-              delay : 0.2,
-              autoAlpha: 1,
-              width : "100%",
-        })
 
-    },[])
-}
+export const useBodyTextAnimaition = (
+  refArr: React.MutableRefObject<HTMLDivElement[]>
+) => {
+  useEffect(() => {
+    refArr.current.forEach((ref, index) => {
+      gsap.from(ref, {
+        scrollTrigger: {
+          trigger: ref,
+          start: "bottom bottom",
+          toggleActions: "play pause reserve reset",
+        },
+        opacity: 0,
+        y: 100,
+        duration: 1,
+      });
+    });
+  }, []);
+};

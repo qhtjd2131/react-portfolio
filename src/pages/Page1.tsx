@@ -1,23 +1,53 @@
 import React, { forwardRef, useRef } from "react";
-import { useDividerAnimation, useHeaderAnimation } from "./Page1.hooks";
+import {
+  useBodyTextAnimaition,
+  useDividerAnimation,
+  useHeaderAnimation,
+} from "./Page1.hooks";
 import * as style from "./Page1.style";
 
 const Page1 = forwardRef<HTMLTableSectionElement>((props, ref) => {
   const headerTextRef = useRef<HTMLHeadingElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
+  const bodyTextRefs = useRef<HTMLDivElement[]>([]);
+
   useHeaderAnimation(headerTextRef);
   useDividerAnimation(dividerRef);
+  useBodyTextAnimaition(bodyTextRefs);
 
+  const bodyData = [
+    "React의 핵심 개념과 동작 원리를 중심으로 이유 있는 코드를 작성하기 위해 항상 고민합니다.",
+    "TypeScript를 적용하여 보다 체계적이고 생산적으로 개발했습니다.",
+    "Gatsby를 사용하여 블로그를 제작했습니다. 제작된 블로그는 Gatsby Cloud를 통해 배포하였습니다.",
+    "create-react-app 없이 프로젝트를 진행하여 react, babel, webpack의 관계를 파악하고, 더 나아가 웹 생태계를 이해하려고 노력했습니다.",
+    "Animation에 관심이 있으며, GSAP(GreenSocks)를 사용한 개발 경험이 있습니다.",
+  ];
+
+  const headerContent = (
+    <style.HeaderSection>
+      <style.HeaderText ref={headerTextRef}>간단 소개글</style.HeaderText>
+    </style.HeaderSection>
+  );
   return (
     <style.PageBox ref={ref}>
       <style.ContentsWrapper>
-        <style.HeaderSection>
-          <style.HeaderText ref={headerTextRef}>첫번째 페이지</style.HeaderText>
-        </style.HeaderSection>
-
+        {headerContent}
         <style.SectionDivider ref={dividerRef} />
+
+        <style.BodySection>
+          {bodyData.map((text, index) => (
+            <style.TextWrapper key={text}>
+              <style.BodyText
+                ref={(el: HTMLDivElement) => (bodyTextRefs.current[index] = el)}
+              >
+                {text}
+              </style.BodyText>
+            </style.TextWrapper>
+          ))}
+        </style.BodySection>
       </style.ContentsWrapper>
     </style.PageBox>
   );
 });
+
 export default Page1;
