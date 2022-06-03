@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import * as constants from "../../constants";
 import gsap from "gsap";
 import { debounce } from "lodash";
-import path from "path/posix";
 
 export const useSetNavLink = (
   refArr: React.MutableRefObject<HTMLAnchorElement[]>,
@@ -47,6 +46,7 @@ export const useSetLinkAnimation = (
             trigger: document.body,
             start: `${startPosition} top`,
             toggleActions: "play pause reserve reset",
+            // markers : true,
           },
           fontWeight: 600,
         });
@@ -56,36 +56,17 @@ export const useSetLinkAnimation = (
   }, []);
 };
 
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height,
-  };
-}
+
 export const useSetPathAnimaition = (
   pathRef: React.RefObject<HTMLDivElement>
 ) => {
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions()
-  );
-
-  useEffect(() => {
-    const handleResize = debounce(() => {
-      //   gsap.killTweensOf(ref.current);
-      setWindowDimensions(getWindowDimensions());
-    }, 500);
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
 
 
   // scroll에 따라서 scrub이 변화해야함
-  // 하지만 window 객체가 resize 되면 scrub이 정상적으로 동작하지않음. 
+  // 하지만 window 객체가 resize 되면 scrub이 정상적으로 동작하지않음.
   // 왜인가?
   // readme에도 작성해보자
+  // markers도 이상하게 나오는거같음
   useEffect(() => {
     if (pathRef != null) {
       console.log("resize hook");
@@ -95,17 +76,19 @@ export const useSetPathAnimaition = (
         scrollTrigger: {
           id: "pathRef-controll",
           trigger: document.body,
-          start: () => "top top",
-          end: () => `${endPosition} top`, // page가 4개라서 75%임. 5개면 80%
+          // start: () => "top top",
+          // end: () => `${endPosition} top`, // page가 4개라서 75%임. 5개면 80%
+          start: "top top",
+          end: `${endPosition} top`, // page가 4개라서 75%임. 5개면 80%
           scrub: true,
-          invalidateOnRefresh: true,
+          // invalidateOnRefresh: true,
           markers: true,
         },
         ease: "none",
         height: "100%",
       });
     }
-  }, [windowDimensions]);
+  }, []);
 };
 
 //Refactoring 타임

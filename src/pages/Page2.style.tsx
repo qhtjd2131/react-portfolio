@@ -7,6 +7,7 @@ export const StartDiv = styled.div`
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
   border-radius: 40px;
+  display : flex;
 
   @keyframes gradient {
     0% {
