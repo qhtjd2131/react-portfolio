@@ -31,9 +31,9 @@ const ScrollNav = ( props : ScrollNavProps ) => {
           ref={(el: HTMLAnchorElement) => {
             sectionLinkRefs.current[index] = el;
           }}
-          style={index === 0 ? { fontWeight: "600", color: theme.side_text_color } : {}}
+          style={index === 0 ? { fontWeight: "600", color: theme.side_text_active_color } : {}}
         >
-          {data.sectionLabel[index] ? data.sectionLabel[index] : ""}
+          {constants.SECTION_LABEL[index] ? constants.SECTION_LABEL[index] : "?"}
         </style.SectionLink>
       );
     });

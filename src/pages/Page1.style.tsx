@@ -14,9 +14,3 @@ export const BodyText = styled.div`
   padding  :4px;
 `;
 
-export const TextWrapper = styled.div`
-  width: 100%;
- 
- 
-  /* overflow : hidden; */
-`;

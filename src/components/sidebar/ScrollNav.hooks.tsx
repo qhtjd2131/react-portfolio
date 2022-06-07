@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import * as constants from "../../constants";
 import gsap from "gsap";
-import { debounce } from "lodash";
 import theme from "../../style/theme";
 
 export const useSetNavLink = (
@@ -37,11 +36,10 @@ export const useSetLinkAnimation = (
   refArr: React.MutableRefObject<HTMLAnchorElement[]>
 ) => {
   useEffect(() => {
-    // const timeline = gsap.timeline();
     const refLen = refArr.current.length;
     refArr.current.forEach((ref, index) => {
       if (index != 0) {
-        const startPosition = (1 / refLen) * 100 * index - 1 + "%";
+        const startPosition =  (1 / refLen) * 100 * index - 1 + "%";
         gsap.to(ref, {
           scrollTrigger: {
             trigger: document.body,
@@ -49,11 +47,8 @@ export const useSetLinkAnimation = (
             toggleActions: "play pause reserve reset",
             // markers : true,
           },
-          fontWeight: 600,
-          color: theme.side_text_color,
-          
+          color: theme.side_text_active_color,      
         });
-        // timeline.add(gsapTo);
       }
     });
   }, []);
@@ -62,11 +57,6 @@ export const useSetLinkAnimation = (
 export const useSetPathAnimaition = (
   pathRef: React.RefObject<HTMLDivElement>
 ) => {
-  // scroll에 따라서 scrub이 변화해야함
-  // 하지만 window 객체가 resize 되면 scrub이 정상적으로 동작하지않음.
-  // 왜인가?
-  // readme에도 작성해보자
-  // markers도 이상하게 나오는거같음
   useEffect(() => {
     if (pathRef != null) {
       console.log("resize hook");

@@ -15,7 +15,11 @@ const Main = () => {
   useSetMainAnimation(mainRef);
   useSetMainTextAnimation(textRefs);
 
-  //data 를 어떤식으로 저장하고 관리할것인가?
+  // data 를 어떤식으로 저장하고 관리할것인가?
+
+  // 변수하나로 페이지 구조를 모두 변경할 수 있을까?
+
+  // intro 부분을 기술스택으로 변경하면 어떨까?
 
   const textContents = Object.keys(mainText).map((key: string, index) => {
     return (

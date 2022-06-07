@@ -25,7 +25,7 @@ export const StartDiv = styled.div`
   }
 `;
 
-export const HyperLinkWrapper = styled.a<{ left: string, zIndex : number}>`
+export const HyperLinkWrapper = styled.a<{ left: string; zIndex: number }>`
   width: 60%;
   position: absolute;
   transform: rotateY(-45deg);

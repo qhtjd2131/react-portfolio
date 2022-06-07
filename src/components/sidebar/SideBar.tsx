@@ -8,8 +8,7 @@ interface SideBarProps {
 const SideBar = (props: SideBarProps) => {
   return (
     <style.SideBarBox>
-              <style.PortFolioTextLogo>PortFolio</style.PortFolioTextLogo>
-
+      <style.PortFolioTextLogo>PortFolio</style.PortFolioTextLogo>
       <ScrollNav pageRefs={props.pageRefs} />;
     </style.SideBarBox>
   );

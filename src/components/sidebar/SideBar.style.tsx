@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SideBarBox = styled.div`
   height: calc(var(--vh) * 100);
-  background-color:#252526;
+  background-color:${(props) => props.theme.side_bg_color};
   width: ${(props) => props.theme.sidebar_width};
   position: fixed;
   top: 0;
@@ -18,7 +18,7 @@ export const SideBarBox = styled.div`
 export const PortFolioTextLogo = styled.div`
   font-size: 36px;
   font-weight: 600;
-  color:  #c4c08d;
+  color:  ${(props)=>props.theme.portfolio_logo_color};
   position: absolute;
   top: 0;
   left: 0;

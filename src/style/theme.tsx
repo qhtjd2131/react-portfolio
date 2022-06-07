@@ -16,7 +16,10 @@ interface Theme {
   main_bg_color: string;
   main_text_color: string;
   side_bg_color: string;
-  side_text_color: string;
+  side_text_normal_color: string;
+  side_text_active_color: string;
+  side_path_color: string;
+  side_path_bg_color: string;
 }
 const theme: Theme = {
   size_4: "only screen and (max-width: 400px)",
@@ -34,8 +37,13 @@ const theme: Theme = {
   page_header_height: "100px",
   main_bg_color: "#1e1e1e",
   main_text_color: "white",
-  side_bg_color: "",
-  side_text_color: "#c4c08d",
+  side_bg_color: "#252526",
+  side_text_active_color: "#c4c08d",
+  side_text_normal_color: "white",
+  side_path_color: "#519aac",
+  side_path_bg_color: "white",
+
+  portfolio_logo_color: "#c4c08d",
 };
 
 export default theme;

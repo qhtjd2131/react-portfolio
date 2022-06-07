@@ -31,7 +31,7 @@ export const SectionWrapper = styled.div`
 export const BackPath = styled.div`
   width: 4px;
   height: 100%;
-  background-color: white;
+  background-color: ${(props)=>props.theme.side_path_bg_color};
   margin: 0 auto;
   overflow: hidden;
 `;
@@ -39,7 +39,7 @@ export const FrontPath = styled.div`
   width: 4px;
   height: 1%;
   margin: 0 auto;
-  background-color: #519aac;
+  background-color : ${(props)=>props.theme.side_path_color};
 `;
 
 export const TextWrapper = styled.div`
@@ -53,6 +53,5 @@ export const TextWrapper = styled.div`
 export const SectionLink = styled.a`
   font-size: 20px;
   cursor: pointer;
-  /* color :#c4c08d; */
-  color : white;
+  color : ${(props)=>props.theme.side_text_normal_color};
 `;
