@@ -12,7 +12,6 @@ import { getPageContents } from "./pageInfo";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 
-
 const App = () => {
   useCustomHeight();
 
@@ -25,7 +24,7 @@ const App = () => {
 
   return (
     <style.GlobalWrapper ref={appRef}>
-      <Main />
+      <Main data-testid="main"/>
       <SideBar pageRefs={pageRefs} />
 
       {pageContents}

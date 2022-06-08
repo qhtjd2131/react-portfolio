@@ -1,17 +1,12 @@
 import React, { useRef } from "react";
 import * as style from "./Main.style";
 import Tsparticles from "../components/Tsparticles";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
 import { useSetMainAnimation, useSetMainTextAnimation } from "./Main.hooks";
 import { mainText } from "../information";
-gsap.registerPlugin(ScrollTrigger);
 
 const Main = () => {
   const mainRef = useRef<HTMLDivElement>(null);
   const textRefs = useRef<HTMLDivElement[]>([]);
-
-  console.log("mmm");
   useSetMainAnimation(mainRef);
   useSetMainTextAnimation(textRefs);
 
@@ -25,6 +20,7 @@ const Main = () => {
     return (
       <style.OneText
         key={key}
+        data-testid={"main-text-" + index}
         ref={(el: HTMLDivElement) => (textRefs.current[index] = el)}
       >
         {mainText[key]}

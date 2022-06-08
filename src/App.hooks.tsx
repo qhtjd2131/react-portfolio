@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import gsap from "gsap";
 
 export const useSetAppAnimation = (
   refArr: React.MutableRefObject<HTMLTableSectionElement[]>
