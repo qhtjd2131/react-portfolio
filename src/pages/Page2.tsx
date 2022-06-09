@@ -17,7 +17,7 @@ const Page2 = forwardRef<HTMLTableSectionElement>((prop, ref) => {
   return (
     <commonStyle.PageBox ref={pageRef}>
       <commonStyle.ContentsWrapper>
-        <HeaderSection text=" 2 page " />
+        <HeaderSection text="page 2" />
 
         <SectionDivider />
         <commonStyle.BodySection>

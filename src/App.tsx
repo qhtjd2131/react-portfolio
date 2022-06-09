@@ -24,10 +24,11 @@ const App = () => {
 
   return (
     <style.GlobalWrapper ref={appRef}>
-      <Main data-testid="main"/>
+      <Main data-testid="main-com"/>
       <SideBar pageRefs={pageRefs} />
 
       {pageContents}
+      
     </style.GlobalWrapper>
   );
 };

@@ -1,4 +1,5 @@
 import gsap from "gsap";
+
 import React, { forwardRef, useEffect, useRef } from "react";
 import * as style from "./SectionDivider.style";
 

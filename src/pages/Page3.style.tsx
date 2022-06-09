@@ -19,3 +19,7 @@ export const ContentsWrapper = styled.div`
     box-sizing : border-box;
     padding : 20px;
 `;
+
+export const TestText = styled.div`
+  
+`;

@@ -28,7 +28,7 @@ const Main = () => {
     );
   });
   return (
-    <style.OneMain id="main" ref={mainRef}>
+    <style.OneMain ref={mainRef}>
       <Tsparticles />
       {textContents}
     </style.OneMain>
